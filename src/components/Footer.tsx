@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     viewport={{ once: true }}
                 >
-                    © {currentYear} Performance Marketing Consultant. All rights reserved.
+                    © {currentYear} Dipayan Dey. All rights reserved.
                 </motion.div>
             </div>
         </footer>

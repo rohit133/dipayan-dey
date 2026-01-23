@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import { aboutData } from '@/lib/data';
+import { ScrollRevealText } from '@/components/ui/ScrollRevealText';
 import NoiseBackground from './NoiseBackground';
 
 const About: React.FC = () => {
@@ -21,7 +22,7 @@ const About: React.FC = () => {
                         viewport={{ once: true }}
                     >
                         <motion.h2
-                            className="text-5xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight"
+                            className="text-5xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight font-display font-medium"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
@@ -30,15 +31,12 @@ const About: React.FC = () => {
                             {aboutData.title}
                         </motion.h2>
 
-                        <motion.p
-                            className="text-xl text-gray-700 mb-10 leading-relaxed font-medium"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.3 }}
-                            viewport={{ once: true }}
-                        >
-                            {aboutData.description}
-                        </motion.p>
+                        <div className="mb-10">
+                            <ScrollRevealText
+                                text={aboutData.description}
+                                className="text-xl md:text-2xl text-gray-900 leading-relaxed font-display font-light"
+                            />
+                        </div>
 
                         <div className="space-y-4">
                             {aboutData.expertise.map((item, index) => (

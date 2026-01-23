@@ -3,18 +3,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, TrendingUp } from 'lucide-react';
-import { heroData } from '@/lib/data';
+import { heroData, contactData } from '@/lib/data';
+import { TextReveal } from '@/components/ui/TextReveal';
 import { Button } from '@/components/ui/button';
+import { CalModalButton } from '@/components/ui/CalModalButton';
 import NoiseBackground from './NoiseBackground';
 
 const Hero: React.FC = () => {
-    const scrollToProjects = () => {
-        document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-    };
 
-    const scrollToContact = () => {
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    };
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
@@ -68,21 +64,22 @@ const Hero: React.FC = () => {
                         </motion.div>
                     </motion.div>
 
+
                     {/* Main headline */}
-                    <motion.h1
-                        className="text-6xl md:text-7xl lg:text-8xl font-light text-gray-900 mb-8 leading-[0.95] tracking-tight font-display"
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                    >
-                        {heroData.headline.split(' ').slice(0, 3).join(' ')}
-                        <br />
-                        <span className="text-orange-600 italic">
-                            {heroData.headline.split(' ').slice(3, 6).join(' ')}
+                    <div className="text-6xl md:text-7xl lg:text-8xl font-light text-gray-900 mb-8 leading-[0.95] tracking-tight font-display">
+                        <TextReveal
+                            text={heroData.headline.split(' ').slice(0, 3).join(' ')}
+                            className="inline-flex justify-center flex-wrap"
+                            delay={0.2}
+                        />
+                        <span className="text-orange-600 italic inline-block">
+                            <TextReveal
+                                text={heroData.headline.split(' ').slice(3).join(' ')}
+                                className="inline-flex justify-center flex-wrap"
+                                delay={0.4}
+                            />
                         </span>
-                        <br />
-                        {heroData.headline.split(' ').slice(6).join(' ')}
-                    </motion.h1>
+                    </div>
 
                     {/* Subheadline */}
                     <motion.p
@@ -101,23 +98,21 @@ const Hero: React.FC = () => {
                         transition={{ duration: 0.8, delay: 0.6 }}
                         className="flex flex-wrap gap-4 mb-20"
                     >
-                        <Button
-                            onClick={scrollToContact}
+                        <CalModalButton
                             size="lg"
                             className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-7 text-lg font-semibold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 group"
                         >
                             <Download className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform" />
                             {heroData.cta}
-                        </Button>
-                        <Button
-                            onClick={scrollToContact}
+                        </CalModalButton>
+                        <CalModalButton
                             size="lg"
                             variant="outline"
                             className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white px-8 py-7 text-lg font-semibold rounded-xl transition-all duration-300 group"
                         >
                             {heroData.ctaSecondary}
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </Button>
+                        </CalModalButton>
                     </motion.div>
 
                     {/* Stats Grid */}

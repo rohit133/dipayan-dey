@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, Linkedin, Calendar } from 'lucide-react';
 import { contactData } from '@/lib/data';
 import { Button } from '@/components/ui/button';
+import { CalModalButton } from '@/components/ui/CalModalButton';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
@@ -26,12 +27,17 @@ const Contact: React.FC = () => {
         message: ''
     });
 
+    const hiddenCalBtnRef = useRef<HTMLButtonElement>(null);
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Mock submission
         toast.success("Message Sent!", {
-            description: "I'll get back to you within 24 hours with a clear plan.",
+            description: "Opening scheduler...",
         });
+        setTimeout(() => {
+            hiddenCalBtnRef.current?.click();
+        }, 1000);
         setFormData({ name: '', email: '', company: '', message: '' });
     };
 
@@ -182,24 +188,20 @@ const Contact: React.FC = () => {
                                     </div>
                                 </motion.a>
 
-                                <motion.a
-                                    href={`https://${contactData.calendly}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-4 group"
-                                    whileHover={{ x: 5 }}
-                                    transition={{ duration: 0.2 }}
+                                <CalModalButton
+                                    variant="ghost"
+                                    className="flex items-center gap-4 group p-0 h-auto hover:bg-transparent justify-start w-full"
                                 >
-                                    <div className="w-12 h-12 bg-gray-900 flex items-center justify-center group-hover:bg-orange-600 transition-colors">
+                                    <div className="w-12 h-12 bg-gray-900 flex items-center justify-center group-hover:bg-orange-600 transition-colors flex-shrink-0">
                                         <Calendar className="w-6 h-6 text-white" />
                                     </div>
-                                    <div>
+                                    <div className="text-left">
                                         <div className="text-xs text-gray-500 font-bold uppercase tracking-wide">Schedule Call</div>
                                         <div className="text-gray-900 font-bold group-hover:text-orange-600 transition-colors">
                                             Book 30-min strategy session
                                         </div>
                                     </div>
-                                </motion.a>
+                                </CalModalButton>
                             </div>
                         </div>
 
@@ -212,7 +214,13 @@ const Contact: React.FC = () => {
                     </motion.div>
                 </div>
             </div>
-        </section>
+
+            {/* Hidden button for programmatic trigger */}
+            <div className="hidden">
+                <CalModalButton ref={hiddenCalBtnRef}>Hidden Trigger</CalModalButton>
+            </div>
+
+        </section >
     );
 };
 

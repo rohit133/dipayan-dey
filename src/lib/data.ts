@@ -57,7 +57,7 @@ export const servicesData: ServicesData = {
     services: [
         {
             id: 1,
-            title: "Performance Marketing",
+            title: "Dipayan Dey",
             subtitle: "Meta & Google Ads",
             description: "Full-funnel campaigns that drive conversions, not just clicks. Built for scale and profitability.",
             icon: "target"
@@ -334,5 +334,6 @@ export const contactData: ContactData = {
     subtitle: "No sales pitch. No obligations. Just honest feedback and a clear roadmap.",
     email: "dipayandey22@gmail.com",
     linkedin: "www.linkedin.com/in/dipayan-dey",
-    calendly: "calendly.com/performancemarketer/strategy-call"
+    calendly: "calendly.com/performancemarketer/strategy-call",
+    calCom: "cal.com/dipayan"
 };

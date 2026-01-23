@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { TextReveal } from '@/components/ui/TextReveal';
 
 interface SectionHeaderProps {
     title: string;
@@ -26,9 +27,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
         >
-            <h2 className={titleClassName}>
-                {title}
-            </h2>
+            <TextReveal text={title} className={titleClassName} />
             <p className={subtitleClassName}>
                 {subtitle}
             </p>

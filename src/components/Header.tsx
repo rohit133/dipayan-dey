@@ -58,7 +58,7 @@ const Header: React.FC = () => {
                         href="#"
                         className="text-gray-900 font-black uppercase tracking-tight"
                     >
-                        Performance Marketing
+                        Dipayan Dey
                     </a>
                 </motion.div>
 
