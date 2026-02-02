@@ -32,7 +32,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     const mouseX = useSpring(0, { stiffness: 150, damping: 20 });
     const mouseY = useSpring(0, { stiffness: 150, damping: 20 });
 
-    function onMouseMove(e: React.MouseEvent) {
+    function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
         const { currentTarget, clientX, clientY } = e;
         const { left, top, width, height } = currentTarget.getBoundingClientRect();
         mouseX.set((clientX - left) / width - 0.5);
@@ -45,7 +45,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         currentTarget.style.setProperty("--mouse-y", `${y}px`);
     }
 
-    function onMouseLeave(e: React.MouseEvent) {
+    function onMouseLeave(e: React.MouseEvent<HTMLDivElement>) {
         mouseX.set(0);
         mouseY.set(0);
         const { currentTarget } = e;
