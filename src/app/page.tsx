@@ -16,12 +16,12 @@ export default function Home() {
       <Header />
       <Hero />
       <About />
-      <Services />
       <Projects />
+      <Services />
       <Process />
-      <LeadMagnet />
       <Testimonials />
-      <WhoIWorkWith />
+      <LeadMagnet />
+      {/* <WhoIWorkWith /> */}
       <Contact />
       <Footer />
     </main>

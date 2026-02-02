@@ -8,74 +8,72 @@ import SectionHeader from './SectionHeader';
 
 const Experience: React.FC = () => {
     return (
-        <section id="experience" className="py-24 bg-gradient-to-b from-slate-50 to-white">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <SectionHeader
-                    title="Experience"
-                    subtitle="8+ years of driving measurable results for brands"
-                    className="text-center mb-16"
-                    titleClassName="text-4xl md:text-5xl font-light text-gray-900 mb-4 font-display"
-                    subtitleClassName="text-xl text-gray-600"
-                />
+        <section id="experience" className="py-32 text-white relative overflow-hidden section-padding">
+
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="mb-24 text-center">
+                    <h2 className="text-xs font-black uppercase tracking-[0.4em] text-orange-600 mb-8">
+                        The Journey
+                    </h2>
+                    <h3 className="text-[12vw] md:text-[6vw] font-black text-white leading-[0.85] tracking-tighter uppercase font-display">
+                        Professional
+                        <br />
+                        <span className="italic text-orange-600">History</span>
+                    </h3>
+                </div>
 
                 {/* Timeline */}
                 <div className="relative">
                     {/* Vertical Line */}
-                    <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-orange-300 via-teal-300 to-orange-300" />
+                    <div className="absolute left-[1.5rem] md:left-1/2 top-0 bottom-0 w-[1px] bg-white/10" />
 
                     {experienceData.map((exp, index) => (
                         <motion.div
                             key={index}
-                            className={`relative mb-16 ${index % 2 === 0 ? 'md:pr-1/2 md:text-right' : 'md:pl-1/2 md:ml-auto md:text-left'
+                            className={`relative mb-24 ${index % 2 === 0 ? 'md:pr-1/2 md:text-right' : 'md:pl-1/2 md:ml-auto md:text-left'
                                 }`}
-                            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8, delay: index * 0.2 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8, delay: index * 0.1 }}
                             viewport={{ once: true }}
                         >
                             {/* Timeline Dot */}
                             <motion.div
-                                className="absolute left-0 md:left-1/2 top-0 w-12 h-12 -ml-6 bg-gradient-to-br from-orange-500 to-teal-500 rounded-full flex items-center justify-center shadow-lg z-10"
-                                whileHover={{ scale: 1.2, rotate: 360 }}
-                                transition={{ duration: 0.5 }}
-                            >
-                                <Briefcase className="w-6 h-6 text-white" />
-                            </motion.div>
+                                className="absolute left-[1rem] md:left-1/2 top-0 w-4 h-4 -md:ml-2 -ml-2 bg-orange-600 rounded-full z-20 shadow-[0_0_20px_rgba(234,88,12,0.5)]"
+                                whileHover={{ scale: 1.5 }}
+                            />
 
-                            <div className={`ml-16 md:ml-0 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'
+                            <div className={`ml-16 md:ml-0 ${index % 2 === 0 ? 'md:pr-20' : 'md:pl-20'
                                 }`}>
                                 <motion.div
-                                    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-500 border border-gray-100"
-                                    whileHover={{ scale: 1.02 }}
-                                    transition={{ duration: 0.3 }}
+                                    className="bg-white/5 border border-white/10 rounded-3xl p-10 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-500 group"
                                 >
-                                    <div className="text-sm font-semibold text-orange-600 mb-2">
+                                    <div className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-600 mb-4 transition-opacity group-hover:opacity-100">
                                         {exp.year}
                                     </div>
-                                    <h3 className="text-2xl font-light text-gray-900 mb-1 font-display">
+                                    <h4 className="text-4xl font-black text-white uppercase tracking-tighter leading-none mb-2 font-display">
                                         {exp.role}
-                                    </h3>
-                                    <div className="text-lg text-teal-600 font-semibold mb-3">
+                                    </h4>
+                                    <div className="text-lg text-gray-400 font-bold mb-8 uppercase tracking-widest">
                                         {exp.company}
                                     </div>
-                                    <p className="text-gray-600 mb-4 leading-relaxed">
+                                    <p className="text-gray-500 font-medium leading-relaxed mb-8 group-hover:text-gray-300 transition-colors">
                                         {exp.description}
                                     </p>
-                                    <ul className="space-y-2">
+                                    <div className={`flex flex-wrap gap-4 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
                                         {exp.achievements.map((achievement, idx) => (
-                                            <motion.li
+                                            <motion.div
                                                 key={idx}
-                                                className="flex items-start gap-2 text-gray-700"
-                                                initial={{ opacity: 0, x: -10 }}
-                                                whileInView={{ opacity: 1, x: 0 }}
-                                                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                                                className="px-4 py-2 bg-white/5 border border-white/5 rounded-full text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-white hover:border-white/20 transition-all"
+                                                initial={{ opacity: 0, y: 10 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                transition={{ duration: 0.5, delay: 0.1 * idx }}
                                                 viewport={{ once: true }}
                                             >
-                                                <span className="text-orange-500 mt-1">•</span>
-                                                <span className="text-sm">{achievement}</span>
-                                            </motion.li>
+                                                {achievement}
+                                            </motion.div>
                                         ))}
-                                    </ul>
+                                    </div>
                                 </motion.div>
                             </div>
                         </motion.div>

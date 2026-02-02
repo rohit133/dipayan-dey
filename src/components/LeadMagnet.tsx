@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { Download, CheckCircle2 } from 'lucide-react';
 import { leadMagnetData } from '@/lib/data';
 import { Button } from '@/components/ui/button';
-import NoiseBackground from './NoiseBackground';
 
 const LeadMagnet: React.FC = () => {
     const handleDownload = () => {
@@ -14,57 +13,75 @@ const LeadMagnet: React.FC = () => {
     };
 
     return (
-        <section className="py-32 bg-orange-600 text-white relative overflow-hidden">
-            <NoiseBackground opacity={0.03} />
+        <section className="py-24 md:py-32 text-foreground relative overflow-hidden">
 
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
+                    className="relative p-10 md:p-20 bg-foreground/[0.03] border border-foreground/10 rounded-[3rem] overflow-hidden backdrop-blur-sm"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-5xl md:text-6xl font-bold mb-6">
-                        {leadMagnetData.title}
-                    </h2>
+                    {/* Decorative internal elements */}
+                    <div className="absolute top-10 right-10 w-32 h-32 border border-foreground/5 rounded-full" />
+                    <div className="absolute -bottom-10 -left-10 w-64 h-64 border border-orange-600/10 rounded-full" />
 
-                    <p className="text-2xl mb-4 text-orange-100">
-                        {leadMagnetData.subtitle}
-                    </p>
-
-                    <p className="text-lg mb-10 text-orange-100 max-w-2xl mx-auto">
-                        {leadMagnetData.description}
-                    </p>
-
-                    <div className="mb-10 space-y-3">
-                        {leadMagnetData.benefits.map((benefit, index) => (
-                            <motion.div
-                                key={index}
-                                className="flex items-center justify-center gap-3 text-lg"
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                                viewport={{ once: true }}
-                            >
-                                <CheckCircle2 className="w-6 h-6 flex-shrink-0" />
-                                <span>{benefit}</span>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        <Button
-                            onClick={handleDownload}
-                            size="lg"
-                            className="bg-white text-orange-600 hover:bg-gray-100 px-10 py-7 text-xl font-bold rounded-xl shadow-2xl"
+                    <div className="max-w-3xl mx-auto text-center">
+                        <motion.span
+                            className="inline-block text-[10px] font-black uppercase tracking-[0.4em] text-orange-600 mb-8 px-4 py-2 bg-orange-600/5 rounded-full border border-orange-600/10"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
                         >
-                            <Download className="mr-3 w-6 h-6" />
-                            {leadMagnetData.cta}
-                        </Button>
-                    </motion.div>
+                            {leadMagnetData.badge}
+                        </motion.span>
+
+                        <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-[1] tracking-tighter uppercase font-display mb-8">
+                            {leadMagnetData.title}
+                            <span className="block italic text-orange-600 mt-4 text-3xl md:text-4xl lg:text-5xl">{leadMagnetData.titleItalic}</span>
+                        </h3>
+
+                        <p className="text-md md:text-lg lg:text-xl text-muted-foreground font-medium mb-12 leading-relaxed max-w-2xl mx-auto">
+                            {leadMagnetData.description}
+                        </p>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mb-16 max-w-4xl mx-auto">
+                            {leadMagnetData.benefits.map((benefit, index) => (
+                                <motion.div
+                                    key={index}
+                                    className="flex flex-col items-center gap-4 p-6 bg-foreground/[0.03] border border-foreground/5 rounded-2xl group hover:bg-orange-600/5 transition-all"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.4 + (index * 0.1) }}
+                                    viewport={{ once: true }}
+                                >
+                                    <div className="w-10 h-10 rounded-full bg-orange-600/10 flex items-center justify-center border border-orange-600/20 group-hover:bg-orange-600 group-hover:border-orange-600 transition-all duration-500">
+                                        <CheckCircle2 className="w-5 h-5 text-orange-600 group-hover:text-white" />
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/80 text-center leading-tight">{benefit}</span>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            <Button
+                                onClick={handleDownload}
+                                className="h-14 md:h-18 px-10 md:px-14 bg-foreground hover:bg-orange-600 text-background hover:text-white rounded-full font-black uppercase tracking-widest text-xs md:text-sm transition-all duration-500 shadow-2xl shadow-orange-600/20 relative group"
+                            >
+                                <motion.div
+                                    className="absolute inset-0 bg-orange-600 rounded-full blur-xl opacity-0 group-hover:opacity-30 transition-opacity"
+                                />
+                                <span className="relative z-10 flex items-center gap-3">
+                                    <Download className="w-5 h-5 md:w-6 md:h-6" />
+                                    {leadMagnetData.cta}
+                                </span>
+                            </Button>
+                        </motion.div>
+                    </div>
                 </motion.div>
             </div>
         </section>

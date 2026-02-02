@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Onest, Fraunces, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
+
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -20,10 +22,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const eduNSWACTCursive = localFont({
+  src: "./fonts/EduNSWACTCursive-VariableFont_wght.ttf",
+  variable: "--font-edu-nsw-act-cursive",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Dipayan Dey Portfolio",
   description: "Dipayan Dey Portfolio",
 };
+
+import SmoothScroll from "@/components/SmoothScroll";
+
+import GlobalBackground from "@/components/GlobalBackground";
 
 export default function RootLayout({
   children,
@@ -31,9 +43,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${onest.variable} ${fraunces.variable} ${geistMono.variable} antialiased`}>
-        {children}
+    <html lang="en" className="dark">
+      <body className={`${onest.variable} ${fraunces.variable} ${geistMono.variable} ${eduNSWACTCursive.variable} antialiased selection:bg-orange-500/30`}>
+        <GlobalBackground />
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
         <Toaster />
       </body>
     </html>

@@ -45,8 +45,8 @@ const Header: React.FC = () => {
         >
             <motion.nav
                 className={`w-full max-w-6xl px-6 py-4 rounded-full transition-all duration-300 flex items-center justify-between ${isScrolled
-                    ? 'bg-[#FFF0E5]/60 backdrop-blur-md shadow-sm border border-white/20'
-                    : 'bg-[#FFF0E5] shadow-none'
+                    ? 'bg-background/40 dark:bg-black/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] border border-foreground/10'
+                    : 'bg-foreground/5 backdrop-blur-sm border border-foreground/5'
                     }`}
             >
                 {/* Logo */}
@@ -56,8 +56,9 @@ const Header: React.FC = () => {
                 >
                     <a
                         href="#"
-                        className="text-gray-900 font-black uppercase tracking-tight"
+                        className="text-foreground font-black uppercase tracking-tight flex items-center gap-2 group"
                     >
+                        <span className="w-8 h-8 bg-foreground text-background flex items-center justify-center rounded-lg transition-transform group-hover:rotate-12">D</span>
                         Dipayan Dey
                     </a>
                 </motion.div>
@@ -72,9 +73,9 @@ const Header: React.FC = () => {
                                 e.preventDefault();
                                 handleNavClick(item.href);
                             }}
-                            className={`px-5 py-2 rounded-full text-sm font-bold uppercase tracking-wide transition-all duration-300 ${item.name === 'Contact'
-                                ? 'bg-gray-900 text-white hover:bg-black shadow-md'
-                                : 'text-gray-700 hover:text-gray-900 hover:bg-black/5'
+                            className={`px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-[0.15em] transition-all duration-300 ${item.name === 'Contact'
+                                ? 'bg-foreground text-background hover:bg-orange-500 hover:text-white shadow-xl shadow-foreground/5 dark:shadow-white/5'
+                                : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
                                 }`}
                         >
                             {item.name}
@@ -84,14 +85,14 @@ const Header: React.FC = () => {
 
                 {/* Mobile Menu Button */}
                 <motion.button
-                    className="md:hidden p-2"
+                    className="md:hidden p-2 text-foreground"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     whileTap={{ scale: 0.95 }}
                 >
                     {isMobileMenuOpen ? (
-                        <X className="w-6 h-6 text-gray-900" />
+                        <X className="w-6 h-6" />
                     ) : (
-                        <Menu className="w-6 h-6 text-gray-900" />
+                        <Menu className="w-6 h-6" />
                     )}
                 </motion.button>
             </motion.nav>
@@ -100,7 +101,7 @@ const Header: React.FC = () => {
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        className="absolute top-24 left-4 right-4 bg-white rounded-2xl shadow-xl overflow-hidden md:hidden border border-gray-100"
+                        className="absolute top-24 left-4 right-4 bg-background/95 dark:bg-black/90 backdrop-blur-2xl rounded-2xl shadow-2xl overflow-hidden md:hidden border border-foreground/10"
                         initial={{ opacity: 0, y: -20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -115,7 +116,7 @@ const Header: React.FC = () => {
                                         e.preventDefault();
                                         handleNavClick(item.href);
                                     }}
-                                    className="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg font-medium transition-colors"
+                                    className="block px-4 py-3 text-muted-foreground hover:bg-foreground/5 hover:text-foreground rounded-lg text-sm font-black uppercase tracking-widest transition-colors"
                                 >
                                     {item.name}
                                 </a>

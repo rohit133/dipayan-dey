@@ -16,6 +16,8 @@ interface ServiceCardProps {
     isExpanded?: boolean;
 }
 
+import { useSpring, useTransform } from 'framer-motion';
+
 const ServiceCard: React.FC<ServiceCardProps> = ({
     title,
     subtitle,
@@ -27,175 +29,107 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     onClick,
     isExpanded
 }) => {
-    const getThemeStyles = () => {
+    const mouseX = useSpring(0, { stiffness: 150, damping: 20 });
+    const mouseY = useSpring(0, { stiffness: 150, damping: 20 });
+
+    function onMouseMove(e: React.MouseEvent) {
+        const { currentTarget, clientX, clientY } = e;
+        const { left, top, width, height } = currentTarget.getBoundingClientRect();
+        mouseX.set((clientX - left) / width - 0.5);
+        mouseY.set((clientY - top) / height - 0.5);
+
+        // Update CSS variables for spotlight effect
+        const x = clientX - left;
+        const y = clientY - top;
+        currentTarget.style.setProperty("--mouse-x", `${x}px`);
+        currentTarget.style.setProperty("--mouse-y", `${y}px`);
+    }
+
+    function onMouseLeave(e: React.MouseEvent) {
+        mouseX.set(0);
+        mouseY.set(0);
+        const { currentTarget } = e;
+        currentTarget.style.removeProperty("--mouse-x");
+        currentTarget.style.removeProperty("--mouse-y");
+    }
+
+    const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10]);
+    const rotateY = useTransform(mouseX, [-0.5, 0.5], [-10, 10]);
+
+    const getThemeAccents = () => {
         switch (theme) {
-            case 'orange':
-                return {
-                    container: 'bg-orange-600',
-                    textTitle: 'text-white',
-                    textSubtitle: 'text-orange-100',
-                    textDesc: 'text-white/90',
-                    iconColor: 'text-white',
-                    learnMoreColor: 'text-white',
-                    hoverBg: undefined
-                };
-            case 'dark':
-                return {
-                    container: 'bg-gray-900',
-                    textTitle: 'text-white',
-                    textSubtitle: 'text-gray-400',
-                    textDesc: 'text-gray-300',
-                    iconColor: 'text-orange-500',
-                    learnMoreColor: 'text-orange-500',
-                    hoverBg: undefined
-                };
-            case 'light':
-                return {
-                    container: 'bg-white',
-                    textTitle: 'text-gray-900',
-                    textSubtitle: 'text-gray-500',
-                    textDesc: 'text-gray-700',
-                    iconColor: 'text-orange-600',
-                    learnMoreColor: 'text-gray-900',
-                    hoverBg: '#f9fafb'
-                };
-            case 'gradient':
-                return {
-                    container: 'bg-gradient-to-br from-gray-100 to-gray-200',
-                    textTitle: 'text-gray-900',
-                    textSubtitle: 'text-gray-600',
-                    textDesc: 'text-gray-800',
-                    iconColor: 'text-gray-900',
-                    learnMoreColor: 'text-gray-900',
-                    hoverBg: undefined
-                };
+            case 'orange': return 'text-orange-600 border-orange-600/20 group-hover:border-orange-600/50';
+            case 'dark': return 'text-foreground border-foreground/10 group-hover:border-foreground/30';
+            case 'light': return 'text-blue-500 border-blue-500/20 group-hover:border-blue-500/50';
+            case 'gradient': return 'text-purple-500 border-purple-500/20 group-hover:border-purple-500/50';
+            default: return 'text-foreground border-foreground/10 group-hover:border-foreground/30';
         }
     };
 
-    const styles = getThemeStyles();
-
-    const renderBackgroundPattern = () => {
-        switch (theme) {
-            case 'orange':
-                return (
-                    <motion.div
-                        className="absolute inset-0 opacity-10"
-                        animate={{
-                            backgroundPosition: ['0% 0%', '100% 100%'],
-                        }}
-                        transition={{
-                            duration: 20,
-                            repeat: Infinity,
-                            repeatType: "reverse"
-                        }}
-                        style={{
-                            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px)',
-                            backgroundSize: '200% 200%',
-                        }}
-                    />
-                );
-            case 'dark':
-                return (
-                    <motion.div
-                        className="absolute inset-0 opacity-5"
-                        animate={{
-                            rotate: [0, 360],
-                        }}
-                        transition={{
-                            duration: 30,
-                            repeat: Infinity,
-                            ease: "linear"
-                        }}
-                        style={{
-                            backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-                            backgroundSize: '20px 20px',
-                        }}
-                    />
-                );
-            case 'light':
-                return (
-                    <motion.div
-                        className="absolute inset-0 opacity-5"
-                        animate={{
-                            x: [0, 20, 0],
-                            y: [0, 20, 0],
-                        }}
-                        transition={{
-                            duration: 5,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                        style={{
-                            backgroundImage: 'linear-gradient(to right, black 1px, transparent 1px), linear-gradient(to bottom, black 1px, transparent 1px)',
-                            backgroundSize: '20px 20px',
-                        }}
-                    />
-                );
-            case 'gradient':
-                return (
-                    <motion.div
-                        className="absolute inset-0 opacity-10"
-                        animate={{
-                            backgroundPosition: ['0% 0%', '100% 0%'],
-                        }}
-                        transition={{
-                            duration: 8,
-                            repeat: Infinity,
-                            ease: "linear"
-                        }}
-                        style={{
-                            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(0,0,0,0.1) 20px, rgba(0,0,0,0.1) 40px)',
-                            backgroundSize: '200% 100%',
-                        }}
-                    />
-                );
-        }
-    };
+    const accentClass = getThemeAccents();
 
     return (
         <motion.div
-            className={`${colSpanClass} row-span-2 relative group cursor-pointer`}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.1 * (index + 1) }}
+            className={`${colSpanClass} row-span-2 relative group cursor-pointer perspective-1000`}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: index * 0.1 }}
             viewport={{ once: true }}
             onClick={onClick}
+            onMouseMove={onMouseMove}
+            onMouseLeave={onMouseLeave}
         >
             <motion.div
-                className={`relative h-full border-4 border-gray-900 p-8 overflow-hidden ${styles.container}`}
-                whileHover={{ scale: 1.02, backgroundColor: styles.hoverBg }}
-                transition={{ duration: 0.3 }}
+                style={{ rotateX, rotateY }}
+                className={`relative h-full bg-foreground/[0.03] backdrop-blur-xl border border-foreground/10 p-8 md:p-10 overflow-hidden rounded-[2.5rem] transition-colors duration-500 group-hover:bg-foreground/[0.06]`}
             >
-                {renderBackgroundPattern()}
+                {/* Spotlight Gradient */}
+                <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                        background: `radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255,255,255,0.06), transparent 40%)`
+                    }}
+                />
+
+                {/* Accent Background Glow */}
+                <div className={`absolute -top-24 -right-24 w-48 h-48 blur-[80px] opacity-0 group-hover:opacity-10 dark:group-hover:opacity-20 transition-opacity duration-700 rounded-full ${theme === 'orange' ? 'bg-orange-500' : 'bg-foreground'}`} />
 
                 <div className="relative z-10 h-full flex flex-col justify-between">
                     <div>
                         <motion.div
-                            whileHover={theme === 'orange' ? { scale: 1.1, rotate: 360 } :
-                                theme === 'light' ? { scale: 1.2, rotate: -10 } :
-                                    theme === 'dark' ? { scale: [1, 1.2, 1], transition: { duration: 3, repeat: Infinity } } :
-                                        { rotate: [0, 5, -5, 0], transition: { duration: 2, repeat: Infinity } }}
-                            transition={{ duration: theme === 'orange' || theme === 'light' ? 0.5 : undefined }}
+                            className={`inline-flex p-3 md:p-4 rounded-2xl bg-foreground/5 mb-6 md:mb-8 border border-foreground/5 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 ${accentClass.split(' ')[0]}`}
                         >
-                            <Icon className={`w-16 h-16 mb-6 ${styles.iconColor}`} />
+                            <Icon className="w-8 h-8 md:w-10 md:h-10" />
                         </motion.div>
-                        <h3 className={`text-3xl md:text-4xl lg:text-5xl font-black mb-3 ${styles.textTitle} font-display`}>
-                            {title}
-                        </h3>
-                        <div className={`text-sm font-bold uppercase tracking-wider mb-4 ${styles.textSubtitle}`}>
+
+                        <div className={`text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] mb-3 md:mb-4 opacity-50 group-hover:opacity-100 transition-opacity ${accentClass.split(' ')[0]}`}>
                             {subtitle}
                         </div>
-                        <p className={`text-base md:text-lg leading-relaxed ${styles.textDesc}`}>
+
+                        <h3 className="text-3xl md:text-4xl font-black text-foreground mb-4 md:mb-6 leading-tight uppercase font-display tracking-tighter">
+                            {title}
+                        </h3>
+
+                        <p className="text-muted-foreground text-md md:text-lg lg:text-xl leading-relaxed font-medium mb-6 md:mb-8 group-hover:text-foreground/80 transition-colors">
                             {description}
                         </p>
                     </div>
-                    <motion.div
-                        className={`flex items-center gap-2 font-bold mt-6 ${styles.learnMoreColor}`}
-                        whileHover={{ x: 10 }}
-                    >
-                        <span>LEARN MORE</span>
-                        <ArrowRight className="w-5 h-5" />
-                    </motion.div>
+
+                    <div className="flex items-center justify-between">
+                        <motion.div
+                            className={`flex items-center gap-3 text-[10px] md:text-xs font-black uppercase tracking-[0.2em] transition-all ${accentClass.split(' ')[0]}`}
+                        >
+                            <span>Explore Details</span>
+                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                        </motion.div>
+
+                        {/* Interactive small dots */}
+                        <div className="flex gap-1.5">
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className={`w-1 h-1 rounded-full bg-foreground/10 group-hover:bg-foreground/40 transition-colors`} style={{ transitionDelay: `${i * 100}ms` }} />
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </motion.div>
         </motion.div>

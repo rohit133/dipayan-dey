@@ -15,9 +15,9 @@ interface SectionHeaderProps {
 const SectionHeader: React.FC<SectionHeaderProps> = ({
     title,
     subtitle,
-    className = "mb-16",
-    titleClassName = "text-5xl md:text-6xl font-light text-gray-900 mb-4 font-display",
-    subtitleClassName = "text-xl text-gray-600 max-w-2xl"
+    className = "mb-20",
+    titleClassName = "text-[8.5vw] md:text-[4.5vw] font-black text-foreground leading-[0.9] tracking-tighter uppercase font-display",
+    subtitleClassName = "text-md md:text-lg lg:text-xl text-muted-foreground font-medium max-w-2xl mt-6 leading-relaxed"
 }) => {
     return (
         <motion.div
@@ -27,7 +27,9 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
         >
-            <TextReveal text={title} className={titleClassName} />
+            <h2 className={titleClassName}>
+                <TextReveal text={title} />
+            </h2>
             <p className={subtitleClassName}>
                 {subtitle}
             </p>
