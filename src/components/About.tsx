@@ -60,7 +60,11 @@ const About: React.FC = () => {
 
                         <motion.h3 className="text-xl md:text-2xl lg:text-3xl font-black text-foreground mb-8 md:mb-10 leading-[41px] tracking-tighter uppercase font-display ">
                             <div className="block md:hidden">
-                                <ScrollRevealText className='font-edu' text={aboutData.mobile_title} />
+                                <ScrollRevealText
+                                    className='font-edu'
+                                    text={aboutData.mobile_title}
+                                    highlightPhrases={["Turn ideas", "data-led", "outcomes,", "Connect", "Brands"]}
+                                />
                             </div>
                             <div className="hidden md:block">
                                 {aboutData.title}

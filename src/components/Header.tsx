@@ -14,12 +14,31 @@ const Header: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState<boolean>(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
+    const [isVisible, setIsVisible] = useState<boolean>(true);
+
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
         };
+
+        const handleHideNav = () => {
+            console.log("Header: hide-nav received");
+            setIsVisible(false);
+        };
+        const handleShowNav = () => {
+            console.log("Header: show-nav received");
+            setIsVisible(true);
+        };
+
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('hide-nav', handleHideNav);
+        window.addEventListener('show-nav', handleShowNav);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('hide-nav', handleHideNav);
+            window.removeEventListener('show-nav', handleShowNav);
+        };
     }, []);
 
     const navItems: NavItem[] = [
@@ -40,7 +59,7 @@ const Header: React.FC = () => {
         <motion.header
             className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4"
             initial={{ y: -100 }}
-            animate={{ y: 0 }}
+            animate={{ y: isVisible ? 0 : -200 }}
             transition={{ duration: 0.5 }}
         >
             <motion.nav

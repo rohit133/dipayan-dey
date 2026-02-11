@@ -1,12 +1,14 @@
 import Header from '@/components/Header';
-import Hero from '@/components/Hero';
+import Hero from '@/components/Hero';  // Original hero
+// import HeroV2 from '@/components/HeroV2';  // New 3D treasure chest hero
 import About from '@/components/About';
+import ScrollSection from '@/components/ScrollSection';
 import Services from '@/components/Services';
 import Projects from '@/components/Projects';
 import Process from '@/components/Process';
 import LeadMagnet from '@/components/LeadMagnet';
 import Testimonials from '@/components/Testimonials';
-import WhoIWorkWith from '@/components/WhoIWorkWith';
+
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -16,14 +18,15 @@ export default function Home() {
       <Header />
       <Hero />
       <About />
+      <ScrollSection />
       <Projects />
       <Services />
       <Process />
       <Testimonials />
       <LeadMagnet />
-      {/* <WhoIWorkWith /> */}
       <Contact />
       <Footer />
     </main>
   );
 }
+

@@ -1,3 +1,5 @@
+// Hero V2 Types
+
 export interface HeroData {
     badge: string;
     headline: string;
