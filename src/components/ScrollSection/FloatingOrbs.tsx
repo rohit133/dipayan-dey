@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { shaderMaterial, Line } from "@react-three/drei";
 import * as THREE from "three";
-import { extend } from "@react-three/fiber";
+import { extend, useFrame } from "@react-three/fiber";
 
 /**
  * Particle Shader Material
@@ -314,17 +314,41 @@ export const FloatingOrbs: React.FC<FloatingOrbsProps> = ({
     // Generate border line points
     const linePoints = useMemo(() => getRoundedRectPoints(aspectRatio, 1.0, 0.05), [aspectRatio]);
 
+    const lineRef = useRef<any>(null);
+
+    useFrame(() => {
+        if (!lineRef.current || !mainOrbRef.current) return;
+
+        // Sync Line opacity with the shader's uBorder uniform
+        const material = (mainOrbRef.current.material as any);
+        if (material && material.uniforms && material.uniforms.uBorder) {
+            const borderVal = material.uniforms.uBorder.value;
+
+            // Logic matches the original intent: fade in during the transition
+            lineRef.current.visible = borderVal > 0.01; // Visible as soon as it starts
+
+            // Fade logic
+            if (lineRef.current.material) {
+                // Smooth fade in from 0 to 1 as borderVal goes 0 to 1
+                lineRef.current.material.opacity = Math.max(0, (borderVal - 0.2) * 1.25);
+                lineRef.current.material.transparent = true;
+                lineRef.current.material.needsUpdate = true;
+            }
+        }
+    });
+
     return (
         <group>
             {/* ============ SOLID BORDER LINE ============ */}
             {/* Fades in to create the "Solid" effect the user requested */}
             <Line
+                ref={lineRef}
                 points={linePoints}
                 color="#ffffffff"
                 lineWidth={3}
                 transparent
-                opacity={Math.max(0, (border - 0.5) * 2)} // Fade in only during the last half of border transition
-                visible={border > 0.43}
+                opacity={0} // Controlled by useFrame
+                visible={false} // Controlled by useFrame
             />
 
             {/* ============ MAIN ORB ============ */}

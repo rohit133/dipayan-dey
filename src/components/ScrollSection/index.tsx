@@ -6,9 +6,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Experience from "./Experience";
-import Process from "../Process";
-
-
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
 }
@@ -107,7 +104,9 @@ export default function ScrollSection() {
                         }}
                         dpr={[1, 2]}
                     >
-                        <Experience scrollContainer={containerRef} />
+                        <Experience
+                            scrollContainer={containerRef}
+                        />
 
                     </Canvas>
                 </div>

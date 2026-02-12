@@ -90,119 +90,153 @@ export default function Experience({ scrollContainer }: IExperienceProps) {
             tl.set(htmlGroup, { opacity: 0, display: 'none' }, 0);
         }
 
-        // 1. FLY-IN
-        tl.to(mainOrb.position, { x: 0, y: -0.2, z: 0, duration: 1, ease: "power2.out" }, 0);
+        // 1. FLY-IN (Faster)
+        tl.to(mainOrb.position, { x: 0, y: -0.2, z: 0, duration: 0.8, ease: "power2.out" }, 0);
         tl.to(leftOrbRef.current!.position, {
             x: -viewport.width * 0.4,
             y: viewport.height * 0.1,
             z: 2,
-            duration: 1.2,
+            duration: 1.0,
             ease: "power2.out"
         }, 0.1);
         tl.to(rightOrbRef.current!.position, {
             x: viewport.width * 0.4,
             y: viewport.height * 0.1,
             z: -1,
-            duration: 1.1,
+            duration: 0.9,
             ease: "power2.out"
         }, 0.05);
 
-        // 2. THE STRUGGLE
+        // 2. THE STRUGGLE (Snappy)
+
+        // A. CHAOS
         tl.to([mainOrb.position, leftOrbRef.current!.position, rightOrbRef.current!.position], {
-            x: 0, y: 0, z: 0, duration: 1.5, ease: "power3.in"
-        }, 1.5);
+            x: 0, y: 0, z: 0,
+            duration: 1.0, // Reduced from 1.5
+            ease: "power3.in"
+        }, 1.2);
 
-        tl.to(leftOrbRef.current!.position, { x: -responsiveX * 0.8, y: -responsiveY * 0.2, z: 1, duration: 0.8, ease: "expo.out" }, 3.0);
-        tl.to(rightOrbRef.current!.position, { x: responsiveX * 0.8, y: responsiveY * 0.2, z: -1, duration: 0.8, ease: "expo.out" }, 3.1);
-        tl.to(mainOrb.position, { y: responsiveY * 0.1, duration: 0.8, ease: "expo.out" }, 3.0);
+        // Quick bounce
+        tl.to(leftOrbRef.current!.position, { x: -2, y: -0.5, z: 1, duration: 0.6, ease: "expo.out" }, 2.2);
+        tl.to(rightOrbRef.current!.position, { x: 2, y: 0.5, z: -1, duration: 0.6, ease: "expo.out" }, 2.3);
+        tl.to(mainOrb.position, { y: 0.5, duration: 0.6, ease: "expo.out" }, 2.2);
 
+
+        // B. ORBIT (Faster Spin)
+        tl.add("orbit_start", ">-0.3");
+
+        tl.to([leftOrbRef.current!.position], { x: -2, y: 0, z: 0, duration: 0.8, ease: "sine.inOut" }, "orbit_start");
+        tl.to([rightOrbRef.current!.position], { x: 2, y: 0, z: 0, duration: 0.8, ease: "sine.inOut" }, "orbit_start");
+        tl.to([mainOrb.position], { x: 0, y: 0, z: 0, duration: 0.8, ease: "sine.inOut" }, "orbit_start");
+
+        tl.to(group.rotation, {
+            z: Math.PI * 2,
+            duration: 1.5, // Reduced from 2.5
+            ease: "sine.inOut"
+        }, "orbit_start");
+
+
+        // 3. MERGE
         tl.to([leftOrbRef.current!.position, rightOrbRef.current!.position], {
-            x: 0, y: 0, z: 0, duration: 1, ease: "back.in(2)"
-        }, 4.0);
+            x: 0, y: 0, z: 0, duration: 0.6, ease: "back.in(1.2)"
+        }, ">-0.3");
 
-        tl.to(leftOrbRef.current!.position, { x: -responsiveX * 0.4, y: 0.5, z: 0.5, duration: 0.5, ease: "elastic.out(1, 0.3)" }, 5.0);
-        tl.to(rightOrbRef.current!.position, { x: responsiveX * 0.4, y: -0.5, z: -0.5, duration: 0.5, ease: "elastic.out(1, 0.3)" }, 5.1);
+        // 3. STRETCH & MORPH (Aggressive but distinct)
+        // Move "morphStart" label to follow previous layout immediately
+        tl.add("morphStart", ">");
 
-        tl.to([mainOrb.position, leftOrbRef.current!.position, rightOrbRef.current!.position], {
-            x: 0, y: 0, z: 0, duration: 1, ease: "power4.inOut"
-        }, 6.0);
-
-        // 3. STRETCH & MORPH
+        // Faster Morph: 0.8s is snappy
         tl.to((mainOrb.material as any).uniforms.uMorph, {
             value: 1.0,
-            duration: 2,
+            duration: 0.8,
             ease: "power2.inOut"
-        }, 7.5);
+        }, "morphStart");
+
+        tl.to(group.rotation, { z: 0, duration: 0.8, ease: "power2.out" }, "morphStart");
 
         tl.to(group.scale, {
             x: responsiveY,
             y: responsiveY,
             z: 1,
-            duration: 2,
+            duration: 1.0,
             ease: "expo.inOut"
-        }, 7.5);
+        }, "morphStart");
 
-        // 3.5 BORDER TRANSFORMATION (Solidify)
-        // Starts only after Morph is fully complete (7.5 + 2 = 9.5)
-        tl.to((mainOrb.material as any).uniforms.uBorder, {
-            value: 1.0,
-            duration: 2.0, // Slower transition to solid frame
+        // MOVE UP (Reset to center)
+        tl.to(group.position, {
+            y: 0, // Centered vertically
+            duration: 1.0,
             ease: "power2.inOut"
-        }, 9.5);
+        }, "morphStart");
 
-        // Fade in HTML content AFTER border is fully solid (9.5 + 2 = 11.5)
-        if (htmlGroup) {
-            tl.set(htmlGroup, { display: 'block', pointerEvents: 'none' }, 11.5);
-            tl.to(htmlGroup, {
-                opacity: 1,
-                duration: 1.0,
-                ease: "power2.out"
-            }, 11.5);
-
-            // Enable interactions only after fully visible
-            tl.set(htmlGroup, { pointerEvents: 'auto' }, 12.5);
-        }
-
-        // Hide aux orbs
+        // Hide aux orbs earlier
         tl.to([(leftOrbRef.current?.material as any).uniforms.uOpacity, (rightOrbRef.current?.material as any).uniforms.uOpacity], {
             value: 0,
-            duration: 1,
-            stagger: 0.2
-        }, 8.0);
+            duration: 0.4,
+            stagger: 0.1
+        }, "morphStart+=0.1");
 
-        // 4. CONDENSING
+
+        // 3.5 BORDER & CONTENT (Hybrid Trigger)
+        // Start border when morph is ~60% done, so we see the rect forming first
+        tl.add("borderStart", "morphStart+=0.5");
+
+        // 1. Solidify Border
+        tl.to((mainOrb.material as any).uniforms.uBorder, {
+            value: 1.0,
+            duration: 0.6,
+            ease: "power2.out"
+        }, "borderStart");
+
+        // 2. Fade in Content
+        if (htmlGroup) {
+            tl.set(htmlGroup, { display: 'flex', pointerEvents: 'none' }, "borderStart");
+            tl.to(htmlGroup, {
+                opacity: 1,
+                duration: 0.6,
+                ease: "power2.out"
+            }, "borderStart+=0.1");
+
+            tl.set(htmlGroup, { pointerEvents: 'auto' }, ">");
+        }
+
+        // 4. CONDENSING / FINAL STATE
+        // CRITICAL FIX: Add a distinct delay so the shape is VISIBLE before shrinking
+        tl.add("finalPhase", ">+0.8"); // Hold the shape for a bit
+
         [mainOrbRef, leftOrbRef, rightOrbRef].forEach((ref, i) => {
             const orb = ref.current;
             if (!orb) return;
+            // Shrink slower so it feels like a settle, not a disappearance
             tl.to((orb.material as any).uniforms.uPointSize, {
                 value: 0.002,
                 duration: 1.5,
-                ease: "power2.in"
-            }, 10.0 + i * 0.1);
+                ease: "power2.out"
+            }, "finalPhase");
 
             tl.to((orb.material as any).uniforms.uOpacity, {
-                value: 0.3,
+                value: 0.4, // Keep slightly more visible
                 duration: 1.5,
                 ease: "power2.inOut"
-            }, 10.0);
+            }, "finalPhase");
         });
 
-        // CAMERA MOTION
+        // CAMERA MOTION (Synced to new speed)
         const activeCameraZ = isMobile ? 12 : 10;
         tl.to(camera.position, {
             z: activeCameraZ,
-            x: isMobile ? 0 : 0.5,
-            y: 0.1,
-            duration: 4,
+            x: 0, // Always center horizontally
+            y: 0, // Always center vertically
+            duration: 3,
             ease: "power3.inOut"
         }, 0);
 
         tl.to(camera.position, {
             x: 0,
             z: activeCameraZ + 2,
-            duration: 6,
+            duration: 4, // Shorter total duration
             ease: "power2.inOut"
-        }, 4.0);
+        }, 3.0);
 
     }, { dependencies: [scrollContainer, viewport.width, viewport.height, cameraRef.current, mainOrbRef.current, groupRef.current] });
 
@@ -271,118 +305,111 @@ export default function Experience({ scrollContainer }: IExperienceProps) {
                     border={0}
                 />
 
-                {/* HTML Overlay: Solid Border & Scrollable Feed */}
+                {/* HTML Overlay: Solid Border & Scrollable Feed (Just Phone Now) */}
                 <Html transform center scale={0.070} position={[0, 0, 0]} zIndexRange={[100, 0]}>
-                    <div ref={htmlRef} style={{
-                        width: '340px',
-                        height: '620px',
-                        borderRadius: '30px',
-                        border: '2px dashed #ff8c42', // THE SOLID BORDER
-                        background: 'rgba(4, 3, 3, 0.95)', // Nearly opaque background
-                        boxShadow: '0 0 20px rgba(255, 140, 66, 0.6), inset 0 0 20px rgba(255, 140, 66, 0.2)', // Glow
-                        padding: '20px',
-                        color: 'white',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        opacity: 0, // GSAP controls this
-                        fontFamily: 'Inter, sans-serif',
-                        overflow: 'hidden', // Contain the scroll
-                    }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
-
-                        {/* Scrollable Feed Content */}
-                        <div ref={(node) => {
-                            if (node) {
-                                const stop = (e: Event) => e.stopPropagation();
-                                node.onwheel = stop;
-                                node.ontouchmove = stop;
-                                node.ontouchstart = stop;
-                            }
-                        }} style={{
-                            flex: 1,
-                            height: '100%', // Constraint for flex child
-                            minHeight: 0,   // Allow shrinking
-                            overflowY: 'auto',
+                        {/* 1. ORIGINAL PHONE FRAME */}
+                        <div ref={htmlRef} style={{
+                            width: '340px',
+                            height: '620px',
+                            borderRadius: '30px',
+                            border: '2px dashed #ff8c42', // THE SOLID BORDER
+                            background: 'rgba(4, 3, 3, 0.95)', // Nearly opaque background
+                            boxShadow: '0 0 20px rgba(255, 140, 66, 0.6), inset 0 0 20px rgba(255, 140, 66, 0.2)', // Glow
+                            padding: '20px',
+                            color: 'white',
                             display: 'flex',
                             flexDirection: 'column',
-                            gap: '12px',
-                            paddingRight: '4px',
-                            pointerEvents: 'auto',
-                            touchAction: 'pan-y',
-                            overscrollBehavior: 'contain'
-                        }} className="no-scrollbar">
-                            {/* Feed Item 1 */}
-                            <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#ff8c42' }} />
-                                    <div>
-                                        <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>Design System</div>
-                                        <div style={{ fontSize: '0.7rem', color: '#888' }}>Just now</div>
-                                    </div>
-                                </div>
-                                <div style={{ fontSize: '0.85rem', lineHeight: 1.4, color: '#ddd' }}>
-                                    Released v2.0 with improved particle physics and haptic feedback integration.
-                                </div>
-                            </div>
+                            opacity: 0, // GSAP controls this
+                            fontFamily: 'Inter, sans-serif',
+                            overflow: 'hidden', // Contain the scroll
+                        }}>
 
-                            {/* Feed Item 2 */}
-                            <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#44aaff' }} />
-                                    <div>
-                                        <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>User Experience</div>
-                                        <div style={{ fontSize: '0.7rem', color: '#888' }}>2h ago</div>
-                                    </div>
-                                </div>
-                                <div style={{ fontSize: '0.85rem', lineHeight: 1.4, color: '#ddd' }}>
-                                    Analyzing scroll depths. Engagement increased by 40% after the new animation update.
-                                </div>
-                                <div style={{ marginTop: '8px', height: '60px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }} />
-                            </div>
 
-                            {/* Feed Item 3 */}
-                            <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#66ff88' }} />
-                                    <div>
-                                        <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>Performance</div>
-                                        <div style={{ fontSize: '0.7rem', color: '#888' }}>5h ago</div>
+                            {/* Scrollable Feed Content */}
+                            <div ref={(node) => {
+                                if (node) {
+                                    const stop = (e: Event) => e.stopPropagation();
+                                    node.onwheel = stop;
+                                    node.ontouchmove = stop;
+                                    node.ontouchstart = stop;
+                                }
+                            }} style={{
+                                flex: 1,
+                                height: '100%', // Constraint for flex child
+                                minHeight: 0,   // Allow shrinking
+                                overflowY: 'auto',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '12px',
+                                paddingRight: '4px',
+                                pointerEvents: 'auto',
+                                touchAction: 'pan-y',
+                                overscrollBehavior: 'contain'
+                            }} className="no-scrollbar">
+                                {/* Feed Item 1 */}
+                                <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                                        <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#ff8c42' }} />
+                                        <div>
+                                            <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>Design System</div>
+                                            <div style={{ fontSize: '0.7rem', color: '#888' }}>Just now</div>
+                                        </div>
+                                    </div>
+                                    <div style={{ fontSize: '0.85rem', lineHeight: 1.4, color: '#ddd' }}>
+                                        Released v2.0 with improved particle physics and haptic feedback integration.
                                     </div>
                                 </div>
-                                <div style={{ fontSize: '0.85rem', lineHeight: 1.4, color: '#ddd' }}>
-                                    Optimized shader compilation. Frame rate stable at 60fps on mobile devices.
-                                </div>
-                            </div>
 
-                            {/* Feed Item 4 */}
-                            <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#44aaff' }} />
-                                    <div>
-                                        <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>User Experience</div>
-                                        <div style={{ fontSize: '0.7rem', color: '#888' }}>2h ago</div>
+                                {/* Feed Item 2 */}
+                                <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                                        <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#44aaff' }} />
+                                        <div>
+                                            <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>User Experience</div>
+                                            <div style={{ fontSize: '0.7rem', color: '#888' }}>2h ago</div>
+                                        </div>
                                     </div>
+                                    <div style={{ fontSize: '0.85rem', lineHeight: 1.4, color: '#ddd' }}>
+                                        Analyzing scroll depths. Engagement increased by 40% after the new animation update.
+                                    </div>
+                                    <div style={{ marginTop: '8px', height: '60px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }} />
                                 </div>
-                                <div style={{ fontSize: '0.85rem', lineHeight: 1.4, color: '#ddd' }}>
-                                    Analyzing scroll depths. Engagement increased by 40% after the new animation update.
-                                </div>
-                                <div style={{ marginTop: '8px', height: '60px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }} />
-                            </div>
 
-                            {/* Feed Item 5 */}
-                            <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#66ff88' }} />
-                                    <div>
-                                        <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>Performance</div>
-                                        <div style={{ fontSize: '0.7rem', color: '#888' }}>5h ago</div>
+                                {/* Feed Item 3 */}
+                                <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                                        <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#66ff88' }} />
+                                        <div>
+                                            <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>Performance</div>
+                                            <div style={{ fontSize: '0.7rem', color: '#888' }}>5h ago</div>
+                                        </div>
+                                    </div>
+                                    <div style={{ fontSize: '0.85rem', lineHeight: 1.4, color: '#ddd' }}>
+                                        Optimized shader compilation. Frame rate stable at 60fps on mobile devices.
                                     </div>
                                 </div>
-                                <div style={{ fontSize: '0.85rem', lineHeight: 1.4, color: '#ddd' }}>
-                                    Optimized shader compilation. Frame rate stable at 60fps on mobile devices.
+
+                                {/* Feed Item 4 */}
+                                <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px', backdropFilter: 'blur(4px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                                        <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: '#44aaff' }} />
+                                        <div>
+                                            <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>User Experience</div>
+                                            <div style={{ fontSize: '0.7rem', color: '#888' }}>2h ago</div>
+                                        </div>
+                                    </div>
+                                    <div style={{ fontSize: '0.85rem', lineHeight: 1.4, color: '#ddd' }}>
+                                        Analyzing scroll depths. Engagement increased by 40% after the new animation update.
+                                    </div>
+                                    <div style={{ marginTop: '8px', height: '60px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px' }} />
                                 </div>
                             </div>
                         </div>
+
+                        {/* Second Container REMOVED from here (moved to index.tsx) */}
+
                     </div>
                     <style>{`.no-scrollbar::-webkit-scrollbar { display: none; }.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }`}</style>
                 </Html>
