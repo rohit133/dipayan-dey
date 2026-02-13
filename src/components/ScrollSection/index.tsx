@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Experience from "./Experience";
-import Process from "../Process";
+
 
 
 if (typeof window !== "undefined") {

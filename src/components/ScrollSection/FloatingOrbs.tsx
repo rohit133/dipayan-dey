@@ -13,7 +13,7 @@ import { extend } from "@react-three/fiber";
 const ParticleMaterial = shaderMaterial(
     {
         uTime: 0,
-        uColor: new THREE.Color("#ff8c42"),
+        uColor: new THREE.Color("#ff6000"),
         uOpacity: 1.0,
         uPointSize: 0.015,
         uMouse: new THREE.Vector3(0, 0, 0),
@@ -22,6 +22,7 @@ const ParticleMaterial = shaderMaterial(
         uBorder: 0.0, // New uniform for border transformation
         uAspectRatio: 0.6, // Aspect ratio for the screen
     },
+
     // Vertex Shader
     `
   uniform float uTime;
@@ -201,29 +202,29 @@ const ParticleMaterial = shaderMaterial(
     strength = mix(strength, sharpDot, uMorph);
 
     float mouseGlow = smoothstep(1.5, 0.0, vDistToMouse);
-    
-    // Add subtle color variation
-    vec3 color = mix(uColor, vec3(1.0), vNoise * 0.2 + mouseGlow * 0.4);
-    
-    // Make color SOLID when border is active
-    if(uBorder > 0.0) {
-        color = mix(color, uColor * 1.5, uBorder); // Brighter, solid owner color
-    }
-    
-    // Brighten for screen effect, intense glow for border
-    float borderGlow = uBorder * 0.5; 
-    
-    // FORCE high opacity for border to look solid
+
     float finalOpacity = strength * uOpacity;
     if(uBorder > 0.0) {
-        // Boost opacity to near 1.0 for solid line look
         finalOpacity = mix(finalOpacity, 1.0, uBorder); 
     }
+
+    // Simplified color logic to ensure true orange
+    vec3 baseColor = uColor;
+    float borderGlow = uBorder * 0.2; 
     
-    // Boost brightness significantly (2.5x) for higher intensity
-    gl_FragColor = vec4(color * (2.5 + uMorph * 0.8 + borderGlow * 1.5), finalOpacity);
+    // Slight variation in brightness, but keep hue
+    vec3 color = baseColor * (1.0 + vNoise * 0.2 + mouseGlow * 0.4);
+
+    // Make denser when border active
+    if(uBorder > 0.0) {
+        color = baseColor * 1.5; 
+    }
+    
+    // Output with controlled brightness
+    gl_FragColor = vec4(color * (1.5 + uMorph * 0.5 + borderGlow), finalOpacity);
   }
   `
+
 );
 
 extend({ ParticleMaterial });
@@ -239,8 +240,6 @@ declare global {
 
 interface FloatingOrbsProps {
     mainOrbRef: React.RefObject<THREE.Points | null>;
-    leftOrbRef: React.RefObject<THREE.Points | null>;
-    rightOrbRef: React.RefObject<THREE.Points | null>;
     opacity?: number;
     morph?: number;
     border?: number;
@@ -280,8 +279,6 @@ const getRoundedRectPoints = (w: number, h: number, r: number, segments = 20) =>
 
 export const FloatingOrbs: React.FC<FloatingOrbsProps> = ({
     mainOrbRef,
-    leftOrbRef,
-    rightOrbRef,
     opacity = 1,
     morph = 0,
     border = 0,
@@ -307,21 +304,22 @@ export const FloatingOrbs: React.FC<FloatingOrbsProps> = ({
     // Initial off-screen/fly-in positions (will be animated by GSAP)
     const initialPositions = {
         main: [0, -10, -5],
-        left: [-15, 2, 0],
-        right: [15, 2, 0]
     };
 
-    // Generate border line points
+    // Generate border line points - matches HTML div aspect ratio (340/620)
     const linePoints = useMemo(() => getRoundedRectPoints(aspectRatio, 1.0, 0.05), [aspectRatio]);
 
     return (
         <group>
-            {/* ============ SOLID BORDER LINE ============ */}
-            {/* Fades in to create the "Solid" effect the user requested */}
+            {/* ============ DASHED BORDER LINE ============ */}
+            {/* Fades in to create the "Phone Frame" effect */}
             <Line
                 points={linePoints}
-                color="#ffffffff"
-                lineWidth={3}
+                color="#ff6000"
+                lineWidth={4}
+                dashed
+                dashSize={0.2}
+                gapSize={0.1}
                 transparent
                 opacity={Math.max(0, (border - 0.5) * 2)} // Fade in only during the last half of border transition
                 visible={border > 0.43}
@@ -333,44 +331,18 @@ export const FloatingOrbs: React.FC<FloatingOrbsProps> = ({
                 {/* @ts-ignore */}
                 <particleMaterial
                     transparent
-                    uColor={new THREE.Color("#ff8c42")}
+                    uColor={new THREE.Color("#ff6000")}
                     uOpacity={opacity}
-                    uPointSize={0.03}
+                    uPointSize={1}
                     uMorph={morph}
                     uBorder={border}
                     uAspectRatio={aspectRatio}
                     depthWrite={false}
-                    blending={THREE.AdditiveBlending}
+                    blending={THREE.NormalBlending}
                 />
             </points>
 
-            {/* ============ LEFT ORB ============ */}
-            <points ref={leftOrbRef} position={initialPositions.left as any} frustumCulled={false}>
-                <sphereGeometry args={[0.8, 48, 48]} />
-                {/* @ts-ignore */}
-                <particleMaterial
-                    transparent
-                    uColor={new THREE.Color("#ffcc66")}
-                    uOpacity={0.9 * opacity}
-                    uPointSize={0.3}
-                    depthWrite={false}
-                    blending={THREE.AdditiveBlending}
-                />
-            </points>
 
-            {/* ============ RIGHT ORB ============ */}
-            <points ref={rightOrbRef} position={initialPositions.right as any} frustumCulled={false}>
-                <sphereGeometry args={[0.8, 48, 48]} />
-                {/* @ts-ignore */}
-                <particleMaterial
-                    transparent
-                    uColor={new THREE.Color("#ff7733")}
-                    uOpacity={0.9 * opacity}
-                    uPointSize={0.3}
-                    depthWrite={false}
-                    blending={THREE.AdditiveBlending}
-                />
-            </points>
 
 
         </group>
