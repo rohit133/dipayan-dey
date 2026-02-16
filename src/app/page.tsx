@@ -13,6 +13,7 @@ import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import PhoneUI from '@/components/ui/phoneui';
+import ParallaxTransition from '@/components/ParallaxTransition';
 
 export default function Home() {
   return (
@@ -20,8 +21,9 @@ export default function Home() {
       <Header />
       <Hero />
       <About />
+      <ParallaxTransition label="What We Build" />
       <PhoneUI />
-      {/* <ScrollSection /> */}
+      <ParallaxTransition label="Strategic Impact" />
       <Projects />
       <Services />
       <Process />

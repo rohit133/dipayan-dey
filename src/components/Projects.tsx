@@ -43,7 +43,7 @@ const Projects: React.FC = () => {
 
                 {/* 1. Introductory Title Sequence */}
                 <motion.div
-                    style={{ opacity: titleOpacity, y: titleY, scale: titleScale }}
+                    style={{ opacity: titleOpacity, y: useTransform(scrollYProgress, [0, 0.1], [0, -150]), scale: titleScale }}
                     className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none px-4"
                 >
                     <motion.div
@@ -68,7 +68,10 @@ const Projects: React.FC = () => {
                 </motion.div>
 
                 {/* 2. Project Cards Stack */}
-                <div className="relative w-full h-full max-w-[90vw] md:max-w-[70vw] mx-auto flex items-center justify-center z-10">
+                <motion.div
+                    style={{ y: useTransform(scrollYProgress, [0.1, 1], [50, -50]) }}
+                    className="relative w-full h-full max-w-[90vw] md:max-w-[70vw] mx-auto flex items-center justify-center z-10"
+                >
                     {projectList.map((project, index) => {
                         const step = 0.9 / totalProjects;
                         const start = 0.1 + (index * step);
@@ -85,7 +88,7 @@ const Projects: React.FC = () => {
                             />
                         );
                     })}
-                </div>
+                </motion.div>
 
                 {/* Progress Indicator */}
                 <div className="absolute bottom-12 left-12 z-50 flex gap-2">

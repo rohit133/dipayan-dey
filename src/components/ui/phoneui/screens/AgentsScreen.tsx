@@ -11,7 +11,7 @@ export default function AgentsScreen({ agentProgress = 0 }: AgentsScreenProps) {
 
   return (
     <div className="h-full w-full bg-[#0a0a0a] text-white flex flex-col overflow-hidden font-sans flex-shrink-0">
-      <div className="flex-shrink-0 p-3 border-b border-white/5 flex items-center gap-2">
+      <div className="flex-shrink-0 pt-[44px] px-3 pb-3 border-b border-white/5 flex items-center gap-2">
         <div className="w-6 h-6 rounded bg-orange-500/80" />
         <span className="text-sm font-semibold">n8n · Workflow</span>
       </div>

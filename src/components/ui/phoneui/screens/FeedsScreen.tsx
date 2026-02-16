@@ -19,7 +19,7 @@ export default function FeedsScreen({ feedScroll = 0 }: FeedsScreenProps) {
 
   return (
     <div className="h-full w-full bg-[#0a0a0a] text-white flex flex-col overflow-hidden font-sans flex-shrink-0">
-      <div className="flex-shrink-0 p-3 border-b border-white/5 flex items-center justify-between">
+      <div className="flex-shrink-0 pt-[44px] px-3 pb-3 border-b border-white/5 flex items-center justify-between">
         <span className="text-sm font-bold">Discover</span>
         <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-orange-500 to-orange-600" />
       </div>

@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState, useMemo, useCallback } from "react";
+import { useRef, useState, useMemo, useCallback, useEffect } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import CaptionReveal from "./CaptionReveal";
 import PhoneScreenContentShorts from "./PhoneScreenContentShorts";
+import RealisticPhoneFrame from "./RealisticPhoneFrame";
 import { phoneUICaptions } from "@/lib/data/phoneui";
 import { scrollToSectionProgress, FEEDS_BAND, ADS_BAND, AGENTS_BAND, SCROLL } from "./scrollRanges";
 
@@ -37,6 +38,19 @@ export default function PhoneSection() {
 
   useMotionValueEvent(scrollYProgress, "change", throttledSet);
 
+  // Hide navbar while phone frame is on-screen
+  const navHiddenRef = useRef(false);
+  useEffect(() => {
+    const shouldHide = scrollProgress >= SCROLL.REVEAL_START && scrollProgress <= SCROLL.END;
+    if (shouldHide && !navHiddenRef.current) {
+      navHiddenRef.current = true;
+      window.dispatchEvent(new Event("hide-nav"));
+    } else if (!shouldHide && navHiddenRef.current) {
+      navHiddenRef.current = false;
+      window.dispatchEvent(new Event("show-nav"));
+    }
+  }, [scrollProgress]);
+
   const sectionProgress = useMemo(
     () => scrollToSectionProgress(scrollProgress),
     [scrollProgress]
@@ -58,26 +72,33 @@ export default function PhoneSection() {
     [0, 1]
   );
 
+  const phoneY = useTransform(scrollYProgress, [0, 1], ["2%", "-2%"]);
+  const captionsY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
+
   return (
     <section
       ref={containerRef}
       className="relative bg-background text-foreground py-14 md:py-20 isolate"
       style={{ height: `${SECTION_HEIGHT_VH}vh`, contain: "layout" }}
     >
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center py-12 md:py-16">
+      <div className="sticky top-0 h-dvh flex flex-col items-center justify-center py-12 md:py-16">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-6 flex-1 min-h-0 min-w-0">
-          {/* CSS-only phone frame – no WebGL for performance */}
-          <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[10/18] flex-shrink-0 rounded-[2rem] border border-white/10 bg-neutral-900/95 shadow-2xl overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 sm:w-24 sm:h-6 rounded-b-full bg-black z-10" aria-hidden />
+          <RealisticPhoneFrame
+            style={{ y: phoneY }}
+            className="w-full max-w-[280px] sm:max-w-[320px] flex-shrink-0"
+          >
             <motion.div
               style={{ opacity: screenContentOpacity }}
-              className="absolute inset-x-2 top-6 bottom-2 sm:inset-x-2.5 sm:top-7 sm:bottom-2.5 rounded-[1.25rem] overflow-hidden bg-[#0a0a0a]"
+              className="absolute inset-0"
             >
               <PhoneScreenContentShorts sectionProgress={sectionProgress} />
             </motion.div>
-          </div>
+          </RealisticPhoneFrame>
 
-          <div className="relative min-h-[3.5rem] w-full max-w-xl flex items-center justify-center flex-shrink-0 text-center">
+          <motion.div
+            style={{ y: captionsY }}
+            className="relative min-h-[3.5rem] w-full max-w-xl flex items-center justify-center flex-shrink-0 text-center"
+          >
             {activeSection === 0 && (
               <div className="absolute inset-0 flex items-center justify-center px-2">
                 <CaptionReveal text={phoneUICaptions[0]} progress={captionProgress0} />
@@ -93,7 +114,7 @@ export default function PhoneSection() {
                 <CaptionReveal text={phoneUICaptions[2]} progress={captionProgress2} />
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
