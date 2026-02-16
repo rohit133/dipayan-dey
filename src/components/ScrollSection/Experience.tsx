@@ -40,8 +40,6 @@ export default function Experience({ scrollContainer }: IExperienceProps) {
         main: [0, -4, -3], // Adjusted up for visibility
     };
 
-
-
     useGSAP(() => {
         if (!scrollContainer.current) return;
 
@@ -346,10 +344,10 @@ export default function Experience({ scrollContainer }: IExperienceProps) {
             </group>
 
             {/* Background Glow Plane */}
-            < mesh scale={[30, 30, 1]} position={[0, 0, -8]} >
+            <mesh scale={[30, 30, 1]} position={[0, 0, -8]} >
                 <planeGeometry />
                 <meshBasicMaterial transparent opacity={0.03} color="#ff6000" />
-            </mesh >
+            </mesh>
         </>
     );
 }

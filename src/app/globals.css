@@ -135,6 +135,28 @@
   background: rgba(249, 115, 22, 0.4);
 }
 
+/* Hide scrollbar but keep scroll behavior (phone screens) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* n8n workflow connector line animation - dashes move along path */
+@keyframes workflow-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+.workflow-flow {
+  animation: workflow-flow 2s linear infinite;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
