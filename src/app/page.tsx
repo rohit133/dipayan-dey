@@ -2,7 +2,8 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';  // Original hero
 // import HeroV2 from '@/components/HeroV2';  // New 3D treasure chest hero
 import About from '@/components/About';
-import ScrollSection from '@/components/ScrollSection';
+// import ScrollSection from '@/components/ScrollSection';
+
 import Services from '@/components/Services';
 import Projects from '@/components/Projects';
 import Process from '@/components/Process';
@@ -11,6 +12,7 @@ import Testimonials from '@/components/Testimonials';
 
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import PhoneUI from '@/components/ui/phoneui';
 
 export default function Home() {
   return (
@@ -18,7 +20,8 @@ export default function Home() {
       <Header />
       <Hero />
       <About />
-      <ScrollSection />
+      <PhoneUI />
+      {/* <ScrollSection /> */}
       <Projects />
       <Services />
       <Process />
