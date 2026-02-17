@@ -23,12 +23,31 @@ const ExpertiseCard: React.FC<ExpertiseCardProps> = ({ item, index, total, scrol
     const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
     const y = useTransform(scrollYProgress, [start, end], [50, 0]);
 
-    // Mobile values (Sequential/Transient)
-    const activeOpacity = useTransform(scrollYProgress, [start, end, end + step], [0, 1, 0]);
+    // Mobile values: Activate when the card hits the center
+    // We shift the range slightly to sync with the vh-based grid movement
+    const activeStart = start - 0.05;
+    const activePeak = start + step / 2;
+    const activeEnd = end + 0.05;
+
+    const activeOpacity = useTransform(
+        scrollYProgress,
+        index === 0 ? [0, activePeak, activeEnd] : [activeStart, activePeak, activeEnd],
+        index === 0 ? [1, 1, 0.1] : [0.1, 1, 0.1]
+    );
+
+    const scale = useTransform(
+        scrollYProgress,
+        index === 0 ? [0, activePeak, activeEnd] : [activeStart, activePeak, activeEnd],
+        index === 0 ? [1.05, 1.05, 0.9] : [0.9, 1.05, 0.9]
+    );
 
     return (
         <motion.div
-            style={{ opacity, y }}
+            style={{
+                opacity: isMobile ? activeOpacity : opacity,
+                y,
+                scale: isMobile ? scale : 1
+            }}
             className="group relative p-10 bg-foreground/[0.02] border border-transparent rounded-[2rem] hover:bg-orange-600/5 transition-colors duration-500 overflow-hidden"
         >
             {/* Animated background glow */}
@@ -48,7 +67,7 @@ const ExpertiseCard: React.FC<ExpertiseCardProps> = ({ item, index, total, scrol
                 }}
             />
 
-            {/* Hover Border Glow */}
+            {/* Hover Border Glow / Active Mobile Glow */}
             <motion.div
                 className="absolute inset-0 rounded-[2rem] border border-orange-500/50 shadow-[0_0_15px_rgba(234,88,12,0.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{ opacity: isMobile ? activeOpacity : undefined }}
@@ -105,16 +124,21 @@ const About: React.FC = () => {
     const contentY = useTransform(scrollYProgress, [0, 1], [0, -40]);
     const imageY = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
+    // Mobile specific: Fade out header content as expertise cards appear
+    const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+
     // Expertise Grid Mobile Scroll Transform
-    const mobileGridY = useTransform(scrollYProgress, [0, 1], ["5%", "-100%"]);
+    // Using vh for precise viewport-relative movement
+    // Reduced end transform to match shorter runway
+    const mobileGridY = useTransform(scrollYProgress, [0, 1], ["25vh", "-110vh"]);
 
     return (
-        <section id="about" className="py-14 md:py-32 text-foreground relative">
+        <section id="about" className="pt-24 pb-12 md:py-48 text-foreground relative">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Content Column */}
-                <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-center mb-18 md:mb-32">
+                <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-center mb-18 lg:mt-18 md:mb-32 ">
                     <motion.div
-                        style={{ y: contentY }}
+                        style={{ y: contentY, opacity: isMobile ? headerOpacity : 1 }}
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
@@ -187,12 +211,12 @@ const About: React.FC = () => {
             </div>
 
             {/* Sticky Expertise Grid Container */}
-            <div ref={containerRef} className="relative h-[450dvh] md:h-[400dvh] -mt-32">
-                <div className="sticky top-0 h-screen flex items-start pt-24 md:pt-0 md:items-center justify-center md:overflow-hidden">
+            <div ref={containerRef} className="relative h-[350dvh] md:h-[400dvh] -mt-16 md:-mt-32">
+                <div className="sticky top-0 h-screen flex items-start pt-12 md:pt-0 md:items-center justify-center md:overflow-hidden">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
                         <motion.div
                             style={{ y: isMobile ? mobileGridY : 0 }}
-                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12"
                         >
                             {aboutData.expertise.map((item, index) => (
                                 <ExpertiseCard

@@ -24,7 +24,7 @@ const Process: React.FC = () => {
         <section
             ref={containerRef}
             id="process"
-            className="relative py-24 md:py-32 overflow-hidden"
+            className="relative py-32 md:py-48 overflow-hidden"
         >
             {/* Background Handled by GlobalBackground */}
 

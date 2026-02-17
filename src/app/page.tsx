@@ -21,14 +21,19 @@ export default function Home() {
       <Header />
       <Hero />
       <About />
-      <ParallaxTransition label="What We Build" />
+      {/* <ParallaxTransition label="Strategic Impact" /> */}
       <PhoneUI />
-      <ParallaxTransition label="Strategic Impact" />
+      {/* <ParallaxTransition label="The Solutions" /> */}
       <Projects />
+      {/* <ParallaxTransition label="Our Expertise" /> */}
       <Services />
+      {/* <ParallaxTransition label="The Journey" /> */}
       <Process />
+      {/* <ParallaxTransition label="Client Stories" /> */}
       <Testimonials />
+      {/* <ParallaxTransition label="Get Started" /> */}
       <LeadMagnet />
+      {/* <ParallaxTransition label="Connect" /> */}
       <Contact />
       <Footer />
     </main>

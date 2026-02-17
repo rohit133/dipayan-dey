@@ -10,7 +10,7 @@ import { scrollToSectionProgress, FEEDS_BAND, ADS_BAND, AGENTS_BAND, SCROLL } fr
 
 const THROTTLE_MS = 48;
 const THROTTLE_DELTA = 0.012;
-const SECTION_HEIGHT_VH = 400;
+const SECTION_HEIGHT_VH = 280;
 
 export default function PhoneSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -78,10 +78,10 @@ export default function PhoneSection() {
   return (
     <section
       ref={containerRef}
-      className="relative bg-background text-foreground py-14 md:py-20 isolate"
+      className="relative bg-background text-foreground pt-0 pb-0 md:py-20 isolate"
       style={{ height: `${SECTION_HEIGHT_VH}vh`, contain: "layout" }}
     >
-      <div className="sticky top-0 h-dvh flex flex-col items-center justify-center py-12 md:py-16">
+      <div className="sticky top-0 h-dvh flex flex-col items-center justify-center py-0 md:py-16">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-6 flex-1 min-h-0 min-w-0">
           <RealisticPhoneFrame
             style={{ y: phoneY }}
