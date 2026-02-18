@@ -28,7 +28,7 @@ const Hero: React.FC = () => {
     const smoothRotateX = useSpring(rotateX, { stiffness: 100, damping: 30 });
 
     return (
-        <section ref={containerRef} className="relative min-h-[100vh] md:min-h-[140vh] flex items-center md:items-start justify-center overflow-hidden pt-0 md:pt-48">
+        <section ref={containerRef} className="relative min-h-[100dvh] md:min-h-[140vh] flex items-center md:items-start justify-center overflow-hidden pt-0 md:pt-48">
             {/* 3D Scene */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <Hero3D />

@@ -45,7 +45,7 @@ const Contact: React.FC = () => {
     };
 
     return (
-        <section id="contact" className="py-24 md:py-32 text-foreground relative overflow-hidden section-padding">
+        <section id="contact" className="py-32 md:py-48 text-foreground relative overflow-hidden section-padding">
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="mb-20 md:mb-24">

@@ -13,7 +13,7 @@ const LeadMagnet: React.FC = () => {
     };
 
     return (
-        <section className="py-24 md:py-32 text-foreground relative overflow-hidden">
+        <section className="py-32 md:py-48 text-foreground relative overflow-hidden">
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <motion.div

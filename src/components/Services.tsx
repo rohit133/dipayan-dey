@@ -33,7 +33,7 @@ const Services: React.FC = () => {
     ] as const;
 
     return (
-        <section id="services" className="py-32 text-foreground relative overflow-hidden section-padding">
+        <section id="services" className="py-32 md:py-48 text-foreground relative overflow-hidden section-padding">
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Massive Editorial Header */}
