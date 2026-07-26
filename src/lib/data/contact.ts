@@ -1,22 +1,22 @@
 import { ContactData } from "@/types";
 
 export const contactData: ContactData = {
-    badge: "The Connection",
-    title: "Let's Talk",
-    titleItalic: "Growth",
-    description: "Book a free 30-minute strategy call. I'll audit your current setup, identify opportunities, and share exactly what I'd do to scale you profitably.",
-    subtitle: "No sales pitch. No obligations. Just honest feedback and a clear roadmap.",
-    email: "dipayandey22@gmail.com",
+    badge: "Contact",
+    title: "Let's",
+    titleItalic: "Talk",
+    description: "Book a call or send a note — we'll reply within one business day.",
+    subtitle: "",
+    email: "hello@adbibe.com",
     linkedin: "www.linkedin.com/in/dipayan-dey",
     calendly: "calendly.com/performancemarketer/strategy-call",
     calCom: "cal.com/dipayan",
     boxLabels: {
-        email: "Digital Core",
-        linkedin: "Professional Network",
-        calendly: "Time Capsule"
+        email: "Email",
+        linkedin: "LinkedIn",
+        calendly: "Calendar",
     },
     protocol: {
-        title: "Response Protocol",
-        description: "Guaranteed digital response within 24 standard earth hours. For urgent strategic maneuvers, LinkedIn is optimal."
-    }
+        title: "Next steps",
+        description: "30-min call: your funnel, gaps, and what to fix first. No hard sell.",
+    },
 };

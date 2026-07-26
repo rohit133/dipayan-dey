@@ -1,0 +1,47 @@
+ADBIBE GROWTH CHECKLIST
+=======================
+
+Use this checklist to spot funnel leakage before you spend more on traffic.
+
+1. OFFER CLARITY
+- Can a new visitor understand what you do in 5 seconds?
+- Is the primary CTA obvious above the fold?
+- Does the page explain who the service is for and what outcome it creates?
+
+2. TRUST SIGNALS
+- Add founder/operator credibility above the fold.
+- Show relevant brand names, outcomes, and testimonials.
+- Replace generic claims with proof tied to channels, revenue, ROAS, or lead quality.
+
+3. LANDING PAGE UX
+- Keep the headline direct and commercially clear.
+- Use one primary CTA and one secondary CTA.
+- Break long sections into scannable blocks with subheadings and proof points.
+
+4. TRACKING
+- Confirm GA4 page_view, form_submit, and primary CTA click events.
+- Add clean UTM conventions for every active campaign.
+- Check that key conversion events map to the actual business outcome.
+
+5. LEAD FLOW
+- Test every form, scheduler, and email action manually.
+- Route inbound leads to the right person immediately.
+- Define first-response SLAs for warm leads.
+
+6. PAID MEDIA REVIEW
+- Match campaign objectives to the actual conversion goal.
+- Check whether messaging on ads matches messaging on the landing page.
+- Review creative fatigue, budget allocation, search term quality, and audience overlap.
+
+7. CRO PRIORITIES
+- Strengthen CTA copy.
+- Add objection-handling sections and FAQ blocks.
+- Reduce form friction and unnecessary fields.
+- Improve mobile readability before adding more traffic.
+
+8. REPORTING
+- Track CAC, ROAS, lead quality, pipeline contribution, and conversion rate.
+- Stop reporting only clicks and impressions.
+- Review results weekly with clear decisions, not just dashboards.
+
+If you want Adbibe to audit your funnel, visit https://adbibe.com and book a strategy call.

@@ -8,7 +8,7 @@ import "./globals.css";
 const onest = Onest({
   variable: "--font-onest",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const fraunces = Fraunces({
@@ -29,8 +29,51 @@ const eduNSWACTCursive = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Dipayan Dey Portfolio",
-  description: "Dipayan Dey Portfolio",
+  metadataBase: new URL("https://adbibe.com"),
+  title: {
+    default: "Adbibe | AI-Powered Performance Marketing, CRO & Growth Consulting",
+    template: "%s | Adbibe",
+  },
+  description:
+    "Adbibe helps D2C, SaaS, and growth-stage brands improve paid acquisition, conversion rates, tracking, and programmatic performance with founder-led execution.",
+  keywords: [
+    "Adbibe",
+    "performance marketing consultant",
+    "AI marketing consultant",
+    "conversion rate optimization",
+    "programmatic advertising consultant",
+    "Google Ads expert",
+    "Meta Ads consultant",
+    "growth consulting",
+  ],
+  alternates: {
+    canonical: "https://adbibe.com",
+  },
+  openGraph: {
+    title: "Adbibe | AI-Powered Performance Marketing, CRO & Growth Consulting",
+    description:
+      "Founder-led growth consulting for brands that need stronger acquisition systems, cleaner tracking, and better conversion performance.",
+    url: "https://adbibe.com",
+    siteName: "Adbibe",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Adbibe | AI-Powered Performance Marketing, CRO & Growth Consulting",
+    description:
+      "Paid acquisition, CRO, analytics, and programmatic support for growth-stage brands.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 import SmoothScroll from "@/components/SmoothScroll";

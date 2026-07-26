@@ -1,38 +1,38 @@
 import { ServicesData } from "@/types";
 
 export const servicesData: ServicesData = {
-    badge: "Capabilities",
-    titleFirst: "Precision",
-    titleSecond: "Execution",
-    subtitle: "Outcome-driven systems, not just campaign execution",
+    badge: "Services",
+    titleFirst: "What We",
+    titleSecond: "Do",
+    subtitle: "Paid media, CRO, and analytics — built around revenue, not vanity metrics.",
     services: [
         {
             id: 1,
-            title: "Dipayan Dey",
-            subtitle: "Meta & Google Ads",
-            description: "Full-funnel campaigns that drive conversions, not just clicks. Built for scale and profitability.",
-            icon: "target"
+            title: "Paid Acquisition",
+            subtitle: "Google & Meta",
+            description: "Structure, budgets, creative tests, and weekly optimization for CAC and ROAS.",
+            icon: "target",
         },
         {
             id: 2,
-            title: "Programmatic Advertising",
+            title: "Programmatic",
             subtitle: "DV360 & DSPs",
-            description: "Precision targeting at scale. Reach the right audience without wasting budget on noise.",
-            icon: "network"
+            description: "Planning, pacing, troubleshooting, and reporting for complex media buys.",
+            icon: "network",
         },
         {
             id: 3,
-            title: "Media Planning & Strategy",
-            subtitle: "Growth Architecture",
-            description: "Strategic roadmaps that connect channels, fix attribution, and maximize every rupee spent.",
-            icon: "map"
+            title: "Funnel & CRO",
+            subtitle: "Pages & offers",
+            description: "Messaging, CTAs, forms, and trust signals that convert existing traffic.",
+            icon: "map",
         },
         {
             id: 4,
-            title: "Audit & Consulting",
-            subtitle: "Performance Health Check",
-            description: "Identify what's broken, what's working, and where your next 10x opportunity is hiding.",
-            icon: "search"
-        }
-    ]
+            title: "Analytics",
+            subtitle: "Tracking & CRM",
+            description: "GA4, UTMs, dashboards, and lead routing so you know what to scale.",
+            icon: "search",
+        },
+    ],
 };

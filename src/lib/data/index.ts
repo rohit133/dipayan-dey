@@ -11,3 +11,7 @@ export * from './leadMagnet';
 export * from './contact';
 export * from './footer';
 export * from './trust';
+export * from './faq';
+export * from './community';
+export * from './events';
+export * from './adReviews';

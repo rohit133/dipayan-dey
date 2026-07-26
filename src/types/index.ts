@@ -192,6 +192,68 @@ export interface ProjectsData {
     projects: Project[];
 }
 
+export type CommunityAudienceType = "influencer" | "freelancer";
+
+export interface CommunityGroup {
+    id: CommunityAudienceType;
+    title: string;
+    tagline: string;
+    description: string;
+    benefits: string[];
+    whatsappGroupUrl: string;
+    memberLabel: string;
+}
+
+export interface CommunityData {
+    badge: string;
+    title: string;
+    titleAccent: string;
+    description: string;
+    groups: CommunityGroup[];
+    note: string;
+}
+
+export type EventCategory = "influencer" | "performance" | "founders";
+
+export interface WorkshopEvent {
+    id: string;
+    title: string;
+    category: EventCategory;
+    categoryLabel: string;
+    date: string;
+    time: string;
+    format: "Online" | "Hybrid" | "In-person";
+    location: string;
+    description: string;
+    spotsLabel: string;
+    registerUrl: string;
+    registerLabel: string;
+}
+
+export interface EventsData {
+    badge: string;
+    title: string;
+    titleAccent: string;
+    description: string;
+    events: WorkshopEvent[];
+}
+
+export interface AdReview {
+    id: string;
+    quote: string;
+    author: string;
+    role: string;
+    platform: string;
+    rating: number;
+}
+
+export interface AdReviewsData {
+    badge: string;
+    title: string;
+    reviews: AdReview[];
+    submitReviewUrl: string;
+}
+
 export interface ContactData {
     badge: string;
     title: string;

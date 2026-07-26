@@ -1,15 +1,14 @@
 import { LeadMagnetData } from "@/types";
 
 export const leadMagnetData: LeadMagnetData = {
-    badge: "The Catalyst",
-    title: "Download My Free Growth",
-    titleItalic: "Blueprint",
-    subtitle: "The exact framework I use to audit, strategize, and scale brands profitably.",
-    description: "Inside: funnel diagnostic checklist, ROAS optimization framework, creative testing playbook, and attribution setup guide.",
-    cta: "Download Free Blueprint",
+    badge: "Free download",
+    title: "Growth",
+    titleItalic: "Checklist",
+    subtitle: "Spot funnel leaks before you scale spend.",
+    description: "Conversion, tracking, and CTA checks you can run in one sitting.",
+    cta: "Download checklist",
     benefits: [
-        "Proven framework used for 25+ brands",
-        "Actionable steps you can implement today",
-        "No fluff, just strategic insights"
-    ]
+        "Use before an audit or scale-up",
+        "Prioritize fixes in order",
+    ],
 };

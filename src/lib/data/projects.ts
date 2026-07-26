@@ -1,61 +1,77 @@
 import { ProjectsData } from "@/types";
 
 export const projectsData: ProjectsData = {
-    badge: "The Portfolio",
-    title: "Strategic",
-    titleItalic: "Impact",
+    badge: "Case studies",
+    title: "Selected",
+    titleItalic: "Work",
     projects: [
         {
             id: 1,
-            title: "Vakilsearch (SEO Growth)",
-            category: "Legal Tech",
-            description: "Implemented comprehensive on-page and off-page SEO strategy driven by organic insights per service category.",
+            title: "Vakilsearch",
+            category: "Legal Tech · SEO",
+            description: "SEO planning and workflows that lifted organic traffic +50% in 7 months.",
+            fullDescription: "Focused commercial keywords, faster content execution, stronger service-page visibility.",
             metrics: [
-                { label: "Site Visits", value: "+50%" },
-                { label: "Timeframe", value: "7 Months" },
-                { label: "Copy Output", value: "+20%" }
+                { label: "Traffic", value: "+50%" },
+                { label: "Timeline", value: "7 mo" },
             ],
-            channels: ["SEO", "Content Strategy", "Backlinking"],
-            image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&h=600&fit=crop"
+            channels: ["SEO", "Content"],
+            image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&h=600&fit=crop",
+            tags: ["seo"],
+            challenge: "Organic growth lacked focus across service pages.",
+            solution: "Prioritized high-intent pages and tightened execution.",
+            result: "+50% traffic with better publishing efficiency.",
         },
         {
             id: 2,
-            title: "Infant Builders (Social)",
-            category: "Real Estate",
-            description: "Executed digital strategy for lead generation and engagement, outperforming competitors in all engagement metrics.",
+            title: "Infant Builders",
+            category: "Real Estate · Social",
+            description: "Paid + organic social that drove +80% engagement and site visits.",
+            fullDescription: "Sharper lead-gen campaigns and consistent audience engagement in a crowded category.",
             metrics: [
                 { label: "Engagement", value: "+80%" },
                 { label: "Visits", value: "+80%" },
-                { label: "Timeframe", value: "12 Months" }
             ],
-            channels: ["Facebook Ads", "Social Media", "Lead Gen"],
-            image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop"
+            channels: ["Meta", "Social"],
+            image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+            tags: ["social"],
+            challenge: "Inconsistent leads and weak engagement vs competitors.",
+            solution: "Aligned paid and organic around clearer conversion intent.",
+            result: "Stronger pipeline for sales conversations.",
         },
         {
             id: 3,
-            title: "Programmatic Scale",
-            category: "Agency (Datawrkz)",
-            description: "Managed programmatic media campaigns for diverse agency clients using DV360, Xandr, and Amazon DSP.",
+            title: "Datawrkz",
+            category: "Agency · Programmatic",
+            description: "DSP delivery, pacing, and reporting across 10+ platforms.",
+            fullDescription: "Daily optimization and troubleshooting for multi-client programmatic accounts.",
             metrics: [
                 { label: "Platforms", value: "10+" },
-                { label: "Channels", value: "Omnichannel" },
-                { label: "Optimization", value: "Daily" }
+                { label: "Cadence", value: "Daily" },
             ],
-            channels: ["DV360", "AppNexus", "Amazon DSP"],
-            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop"
+            channels: ["DV360", "DSPs"],
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+            tags: ["programmatic"],
+            challenge: "Complex pacing and reporting across live accounts.",
+            solution: "Reliable ops routines and faster issue resolution.",
+            result: "More stable performance at scale.",
         },
         {
             id: 4,
             title: "Black Coffee Media",
             category: "Performance",
-            description: "Focus on Lead Gen and App Installs. Tested new creatives and strategies to maintain perfect ROAS and CPA.",
+            description: "Google & Meta lead-gen with tight ROAS/CPA control.",
+            fullDescription: "Structured testing and reporting to scale without losing efficiency.",
             metrics: [
-                { label: "Focus", value: "ROAS/CPA" },
-                { label: "Platforms", value: "Google/FB" },
-                { label: "Reporting", value: "Automated" }
+                { label: "Focus", value: "ROAS" },
+                { label: "Channels", value: "G/Meta" },
             ],
-            channels: ["Google Ads", "Facebook Ads", "Data Studio"],
-            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
-        }
-    ]
+            channels: ["Google", "Meta"],
+            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+            tags: ["performance"],
+            challenge: "Scale without CPA drift.",
+            solution: "Clear testing loops and channel reporting.",
+            result: "Kept efficiency while growing spend.",
+        },
+    ],
 };
