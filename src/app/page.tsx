@@ -10,6 +10,7 @@ import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
+import StatsBar from '@/components/StatsBar';
 import CommunityBanner from '@/components/CommunityBanner';
 import EventsPreview from '@/components/EventsPreview';
 import AdReviewsBar from '@/components/AdReviewsBar';
@@ -28,7 +29,11 @@ const structuredData = [
       jobTitle: 'Founder',
       sameAs: ['https://www.linkedin.com/in/dipayan-dey'],
     },
-    sameAs: ['https://www.linkedin.com/in/dipayan-dey'],
+    sameAs: [
+      'https://www.linkedin.com/company/adbibeofficial/',
+      'https://www.instagram.com/adbibeofficial',
+      'https://www.facebook.com/adbibeofficial',
+    ],
     description:
       'Adbibe is a founder-led growth consultancy focused on paid acquisition, conversion optimization, analytics, and programmatic execution.',
   },
@@ -70,17 +75,18 @@ export default function Home() {
       />
       <Header />
       <Hero />
+      <StatsBar />
       <About />
-      <WhoIWorkWith />
+      {/* <WhoIWorkWith /> */}
       <Projects />
-      <AdReviewsBar />
+      {/* <AdReviewsBar /> */}
       <Services />
-      <CommunityBanner />
-      <EventsPreview />
+      {/* <CommunityBanner /> */}
+      {/* <EventsPreview /> */}
       <Process />
       <Testimonials />
       <FAQ />
-      <LeadMagnet />
+      {/* <LeadMagnet /> */}
       <Contact />
       <Footer />
     </main>

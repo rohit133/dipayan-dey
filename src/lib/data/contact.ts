@@ -7,7 +7,7 @@ export const contactData: ContactData = {
     description: "Book a call or send a note — we'll reply within one business day.",
     subtitle: "",
     email: "hello@adbibe.com",
-    linkedin: "www.linkedin.com/in/dipayan-dey",
+    linkedin: "www.linkedin.com/company/adbibeofficial",
     calendly: "calendly.com/performancemarketer/strategy-call",
     calCom: "cal.com/dipayan",
     boxLabels: {

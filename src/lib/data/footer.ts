@@ -42,7 +42,9 @@ export const footerData: FooterData = {
     },
     socialLinks: [
         { platform: "Email", href: "mailto:hello@adbibe.com", icon: "Mail" },
-        { platform: "LinkedIn", href: "https://linkedin.com/in/dipayan-dey", icon: "Linkedin" },
+        { platform: "LinkedIn", href: "https://www.linkedin.com/company/adbibeofficial/", icon: "Linkedin" },
+        { platform: "Instagram", href: "https://www.instagram.com/adbibeofficial?utm_source=qr", icon: "Instagram" },
+        { platform: "Facebook", href: "https://www.facebook.com/adbibeofficial", icon: "Facebook" },
     ],
     ecosystem: [
         { label: "Case studies", href: "#projects" },

@@ -9,7 +9,7 @@ import { contactData, heroData } from "@/lib/data";
 import { CalModalButton } from "@/components/ui/CalModalButton";
 import { HeroTitle, Lead } from "@/components/ui/typography";
 
-const trustBar = ["Vakilsearch", "Datawrkz", "Infant Builders", "Black Coffee Media"];
+// const trustBar = ["Vakilsearch", "Datawrkz", "Infant Builders", "Black Coffee Media"];
 
 const fadeUp = {
     initial: { opacity: 0, y: 20 },
@@ -58,40 +58,9 @@ const Hero: React.FC = () => {
                         {heroData.cta}
                         <ArrowRight className="h-4 w-4" />
                     </CalModalButton>
-                    <Link href="#projects" className="btn-secondary h-12 px-7 text-sm sm:h-[3.25rem] sm:text-base">
+                    {/* <Link href="#projects" className="btn-secondary h-12 px-7 text-sm sm:h-[3.25rem] sm:text-base">
                         {heroData.ctaSecondary}
-                    </Link>
-                </motion.div>
-
-                <motion.div
-                    {...fadeUp}
-                    transition={{ duration: 0.55, delay: 0.24 }}
-                    className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4"
-                >
-                    {heroData.stats.map((stat) => (
-                        <div key={stat.label} className="surface-card-static p-4 sm:p-5">
-                            <div className="type-stat">{stat.value}</div>
-                            <p className="type-stat-label mt-1">{stat.label}</p>
-                        </div>
-                    ))}
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.32 }}
-                    className="mt-10 border-t border-white/[0.06] pt-8"
-                >
-                    <p className="mb-3 text-xs font-medium uppercase tracking-widest text-white/40">
-                        {heroData.scrollLabel}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                        {trustBar.map((item) => (
-                            <span key={item} className="chip">
-                                {item}
-                            </span>
-                        ))}
-                    </div>
+                    </Link> */}
                 </motion.div>
             </div>
         </section>

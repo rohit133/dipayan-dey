@@ -92,7 +92,8 @@ const Contact: React.FC = () => {
                     description={contactData.description}
                 />
 
-                <div className="mt-8 max-w-2xl">
+                <div className="mt-8 flex items-start gap-8 lg:gap-10">
+                    <div className="w-full max-w-2xl">
                     <motion.form
                         onSubmit={handleSubmit}
                         className="surface-card-static space-y-5 p-5 sm:p-6"
@@ -183,7 +184,8 @@ const Contact: React.FC = () => {
                                     <CalModalButton
                                         key={item.label}
                                         calLink={contactData.calCom}
-                                        className="surface-card-static flex h-auto min-h-[44px] flex-col items-center justify-center gap-1.5 p-3 text-center hover:border-white/14"
+                                        variant="ghost"
+                                        className="surface-card-static flex h-auto min-h-[44px] flex-col items-center justify-center gap-1.5 p-3 text-center text-white/80 hover:bg-transparent hover:border-white/14"
                                     >
                                         {inner}
                                     </CalModalButton>
@@ -207,6 +209,29 @@ const Contact: React.FC = () => {
                     <BodyText className="mt-4 text-center text-white/50 sm:text-left">
                         {contactData.protocol.description}
                     </BodyText>
+                    </div>
+
+                    <motion.aside
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.45, delay: 0.08 }}
+                        className="hidden w-[240px] shrink-0 pt-1 lg:block xl:w-[280px]"
+                    >
+                        <div className="surface-featured overflow-hidden p-2">
+                            <img
+                                src="/contact-welcome.jpg"
+                                alt="Professional growth strategy session"
+                                className="aspect-[3/4] w-full rounded-xl object-cover"
+                            />
+                        </div>
+                        <p className="mt-4 font-display text-base font-semibold text-white">
+                            Let&apos;s build your next growth move.
+                        </p>
+                        <p className="mt-1.5 text-sm leading-relaxed text-white/50">
+                            Send a note — we&apos;ll reply within one business day.
+                        </p>
+                    </motion.aside>
                 </div>
             </div>
 

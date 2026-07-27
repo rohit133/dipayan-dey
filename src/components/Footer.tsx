@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Mail, Linkedin } from "lucide-react";
+import { Mail, Linkedin, Instagram, Facebook } from "lucide-react";
 
 import { contactData, footerData } from "@/lib/data";
 import { CalModalButton } from "@/components/ui/CalModalButton";
@@ -11,6 +11,8 @@ import { BodyText, Eyebrow } from "@/components/ui/typography";
 const iconMap = {
     Mail,
     Linkedin,
+    Instagram,
+    Facebook,
 } as const;
 
 const Footer: React.FC = () => {
@@ -28,7 +30,7 @@ const Footer: React.FC = () => {
     return (
         <footer className="relative border-t border-white/[0.06] px-4 pb-8 pt-12 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-7xl">
-                <div className="surface-featured flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+                {/* <div className="surface-featured flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
                     <div>
                         <p className="font-display text-lg font-semibold text-white sm:text-xl">
                             Ready to grow smarter?
@@ -46,7 +48,7 @@ const Footer: React.FC = () => {
                             Email us
                         </a>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="mt-8 grid grid-cols-2 gap-8 sm:grid-cols-4">
                     <div className="col-span-2 sm:col-span-1">
