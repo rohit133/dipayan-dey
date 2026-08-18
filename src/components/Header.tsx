@@ -73,16 +73,18 @@ const Header: React.FC = () => {
                 <div className="flex items-center justify-between gap-3">
                     <Link
                         href="/"
-                        className="flex items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/70"
+                        className="flex items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/70"
                         aria-label="Adbibe homepage"
                     >
-                        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 text-sm font-bold text-white shadow-lg shadow-orange-500/25">
-                            A
-                        </span>
+                        <img
+                            src="/logo.png"
+                            alt="Adbibe"
+                            className="h-9 w-9 rounded-xl shadow-lg shadow-sky-500/20"
+                        />
                         <div className="leading-tight">
                             <span className="font-display text-base font-semibold text-white">Adbibe</span>
                             <span className="hidden text-[11px] text-white/45 sm:block">
-                                Performance marketing
+                                AI performance marketing
                             </span>
                         </div>
                     </Link>

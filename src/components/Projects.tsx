@@ -43,7 +43,7 @@ const Projects: React.FC = () => {
                         >
                             <div className="flex items-start justify-between gap-4">
                                 <div>
-                                    <p className="text-xs font-medium uppercase tracking-wider text-orange-300/80">
+                                    <p className="text-xs font-medium uppercase tracking-wider text-sky-300/80">
                                         {project.category}
                                     </p>
                                     <CardTitle className="mt-2">{project.title}</CardTitle>
@@ -51,7 +51,7 @@ const Projects: React.FC = () => {
                                 <button
                                     type="button"
                                     onClick={() => handleOpenModal(project)}
-                                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/70 transition-all hover:border-orange-400/35 hover:bg-orange-500/10 hover:text-orange-200 group-hover:border-orange-400/25"
+                                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/70 transition-all hover:border-sky-400/35 hover:bg-sky-500/10 hover:text-sky-200 group-hover:border-sky-400/25"
                                     aria-label={`View details for ${project.title}`}
                                 >
                                     <ArrowUpRight className="h-4 w-4" />

@@ -26,7 +26,7 @@ const Process: React.FC = () => {
                             viewport={{ once: true, margin: "-40px" }}
                             className="surface-card relative p-5 md:p-6"
                         >
-                            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-orange-500/15 font-mono text-sm font-semibold text-orange-300">
+                            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/15 font-mono text-sm font-semibold text-sky-300">
                                 {step.number}
                             </span>
                             <CardTitle className="mt-4 text-lg">{step.title}</CardTitle>

@@ -51,7 +51,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                     >
                         <button
                             onClick={onClose}
-                            className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/55 text-white transition-colors hover:bg-orange-500"
+                            className="absolute right-4 top-4 z-20 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/55 text-white transition-colors hover:bg-sky-500"
                             aria-label="Close case study"
                         >
                             <X className="h-5 w-5" />
@@ -66,11 +66,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                                         className="absolute inset-0 h-full w-full object-cover"
                                     />
                                 ) : (
-                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.25),transparent_35%),linear-gradient(135deg,#111,#1f1f1f)]" />
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.25),transparent_35%),linear-gradient(135deg,#111,#1f1f1f)]" />
                                 )}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
                                 <div className="absolute bottom-6 left-6 right-6">
-                                    <Eyebrow className="text-orange-200">{project.category}</Eyebrow>
+                                    <Eyebrow className="text-sky-200">{project.category}</Eyebrow>
                                     <CardTitle className="mt-3 text-xl sm:text-2xl">{project.title}</CardTitle>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                                             key={`${project.id}-${metric.label}`}
                                             className="rounded-3xl border border-white/10 bg-white/[0.03] p-4"
                                         >
-                                            <div className="type-stat text-orange-300">{metric.value}</div>
+                                            <div className="type-stat text-sky-300">{metric.value}</div>
                                             <div className="mt-1 text-xs uppercase tracking-[0.16em] text-white/42">
                                                 {metric.label}
                                             </div>
@@ -113,12 +113,12 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                                 </div>
 
                                 {project.result && (
-                                    <section className="rounded-[1.75rem] border border-orange-500/20 bg-orange-500/10 p-5">
+                                    <section className="rounded-[1.75rem] border border-sky-500/20 bg-sky-500/10 p-5">
                                         <div className="flex items-start gap-3">
-                                            <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-orange-200" />
+                                            <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-sky-200" />
                                             <div>
-                                                <Eyebrow className="text-orange-100">Outcome</Eyebrow>
-                                                <Subheading className="mt-3 text-orange-50">
+                                                <Eyebrow className="text-sky-100">Outcome</Eyebrow>
+                                                <Subheading className="mt-3 text-sky-50">
                                                     {project.result}
                                                 </Subheading>
                                             </div>
@@ -142,7 +142,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
 
                                 <CalModalButton
                                     calLink={contactData.calCom}
-                                    className="w-full rounded-full bg-orange-500 px-6 py-3 text-base font-semibold text-white hover:bg-orange-400 sm:w-auto"
+                                    className="w-full rounded-full bg-sky-500 px-6 py-3 text-base font-semibold text-white hover:bg-sky-400 sm:w-auto"
                                 >
                                     Discuss a similar growth plan
                                 </CalModalButton>

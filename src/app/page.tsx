@@ -1,20 +1,18 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
-import WhoIWorkWith from '@/components/WhoIWorkWith';
 import Services from '@/components/Services';
 import Projects from '@/components/Projects';
 import Process from '@/components/Process';
-import LeadMagnet from '@/components/LeadMagnet';
 import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import FAQ from '@/components/FAQ';
 import StatsBar from '@/components/StatsBar';
-import CommunityBanner from '@/components/CommunityBanner';
-import EventsPreview from '@/components/EventsPreview';
-import AdReviewsBar from '@/components/AdReviewsBar';
 import { faqItems } from '@/lib/data/faq';
+
+const CANONICAL_DESCRIPTION =
+  'Adbibe is a founder-led AI performance marketing agency based in Bangalore, India, specializing in paid acquisition, programmatic advertising, CRO, marketing automation, and brand strategy for D2C and SaaS brands.';
 
 const structuredData = [
   {
@@ -22,7 +20,9 @@ const structuredData = [
     '@type': 'Organization',
     name: 'Adbibe',
     url: 'https://adbibe.com',
+    logo: 'https://adbibe.com/logo.png',
     email: 'hello@adbibe.com',
+    description: CANONICAL_DESCRIPTION,
     founder: {
       '@type': 'Person',
       name: 'Dipayan Dey',
@@ -30,27 +30,35 @@ const structuredData = [
       sameAs: ['https://www.linkedin.com/in/dipayan-dey'],
     },
     sameAs: [
+      'https://www.linkedin.com/in/dipayan-dey',
       'https://www.linkedin.com/company/adbibeofficial/',
       'https://www.instagram.com/adbibeofficial',
       'https://www.facebook.com/adbibeofficial',
     ],
-    description:
-      'Adbibe is a founder-led growth consultancy focused on paid acquisition, conversion optimization, analytics, and programmatic execution.',
+    areaServed: 'IN',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Bangalore',
+      addressCountry: 'IN',
+    },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'Adbibe',
     url: 'https://adbibe.com',
-    areaServed: 'Worldwide',
+    areaServed: 'IN',
     serviceType: [
       'Performance marketing',
-      'Conversion rate optimization',
       'Programmatic advertising',
-      'Analytics and attribution consulting',
+      'Marketing automation',
+      'Social media marketing',
+      'Brand strategy',
+      'Marketing consulting',
+      'Conversion rate optimization',
+      'Analytics and attribution',
     ],
-    description:
-      'Adbibe helps D2C, SaaS, agencies, and growth-stage brands improve acquisition efficiency through paid media, CRO, and analytics.',
+    description: CANONICAL_DESCRIPTION,
   },
   {
     '@context': 'https://schema.org',
@@ -77,19 +85,13 @@ export default function Home() {
       <Hero />
       <StatsBar />
       <About />
-      {/* <WhoIWorkWith /> */}
       <Projects />
-      {/* <AdReviewsBar /> */}
       <Services />
-      {/* <CommunityBanner /> */}
-      {/* <EventsPreview /> */}
       <Process />
       <Testimonials />
       <FAQ />
-      {/* <LeadMagnet /> */}
       <Contact />
       <Footer />
     </main>
   );
 }
-

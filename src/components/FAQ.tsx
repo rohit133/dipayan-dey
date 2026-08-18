@@ -23,7 +23,7 @@ const FAQ: React.FC = () => {
                             <div
                                 key={item.question}
                                 className={`surface-card-static overflow-hidden transition-colors ${
-                                    isOpen ? "border-orange-500/20" : ""
+                                    isOpen ? "border-sky-500/20" : ""
                                 }`}
                             >
                                 <button
@@ -36,7 +36,7 @@ const FAQ: React.FC = () => {
                                         {item.question}
                                     </span>
                                     <span
-                                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-orange-300 transition-transform duration-200 ${
+                                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-sky-300 transition-transform duration-200 ${
                                             isOpen ? "rotate-180" : ""
                                         }`}
                                     >

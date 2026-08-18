@@ -53,9 +53,11 @@ const Footer: React.FC = () => {
                 <div className="mt-8 grid grid-cols-2 gap-8 sm:grid-cols-4">
                     <div className="col-span-2 sm:col-span-1">
                         <Link href="/" className="inline-flex items-center gap-2.5">
-                            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 text-sm font-bold text-white">
-                                A
-                            </span>
+                            <img
+                                src="/logo.png"
+                                alt="Adbibe"
+                                className="h-9 w-9 rounded-xl"
+                            />
                             <span className="font-display text-lg font-semibold text-white">Adbibe</span>
                         </Link>
                         <BodyText className="mt-2 text-white/45">adbibe.com</BodyText>
@@ -66,7 +68,7 @@ const Footer: React.FC = () => {
                                     <Link
                                         key={i}
                                         href={social.href}
-                                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-white/55 transition-all hover:border-orange-400/40 hover:bg-orange-500/10 hover:text-white"
+                                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-white/55 transition-all hover:border-sky-400/40 hover:bg-sky-500/10 hover:text-white"
                                         aria-label={social.platform}
                                     >
                                         <Icon className="h-4 w-4" />
@@ -109,7 +111,10 @@ const Footer: React.FC = () => {
                                         href={section.links?.[0]?.href || "#"}
                                         className="link-nav text-white/60"
                                     >
-                                        {section.title.replace(" Policy", "").replace(" & Conditions", "")}
+                                        {section.title
+                                            .replace(" Policy", "")
+                                            .replace(" of Service", "")
+                                            .replace(" Disclosure", "")}
                                     </Link>
                                 </li>
                             ))}
@@ -119,7 +124,7 @@ const Footer: React.FC = () => {
 
                 <div className="mt-8 flex flex-col gap-2 border-t border-white/[0.06] pt-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
                     <p>© {new Date().getFullYear()} {footerData.copyright}</p>
-                    <p className="text-orange-300/60">{footerData.trustStatement}</p>
+                    <p className="text-sky-300/60">{footerData.trustStatement}</p>
                 </div>
             </div>
         </footer>

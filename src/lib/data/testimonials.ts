@@ -1,33 +1,33 @@
 import { TestimonialsData } from "@/types";
 
 export const testimonialsData: TestimonialsData = {
-    badge: "Clients",
-    title: "What They",
-    titleItalic: "Say",
+    badge: "Results",
+    title: "What The",
+    titleItalic: "Work Shows",
     testimonials: [
         {
             id: 1,
-            name: "Growth team",
-            role: "SEO",
-            company: "Vakilsearch",
+            name: "Performance team",
+            role: "App installs",
+            company: "8 Network",
             image: "",
-            quote: "Boosted organic traffic and tightened our SEO workflow fast.",
+            quote: "Show-based segmentation cut CPI from ₹80–100 down to ₹4–9.",
         },
         {
             id: 2,
-            name: "Agency partner",
-            role: "Programmatic",
-            company: "Datawrkz",
+            name: "Growth team",
+            role: "Lead gen",
+            company: "WeSkill",
             image: "",
-            quote: "Handles complex DSP setups and pacing without drama.",
+            quote: "Full-funnel Meta and Google work delivered a 55% CPL reduction.",
         },
         {
             id: 3,
-            name: "Marketing lead",
-            role: "Social",
-            company: "Infant Builders",
+            name: "Ecommerce team",
+            role: "ROAS",
+            company: "Amama",
             image: "",
-            quote: "+80% engagement in year one. Strong on both paid and organic social.",
+            quote: "Product-focused spend lifted ROAS from 1.2x to 4–5x.",
         },
     ],
 };

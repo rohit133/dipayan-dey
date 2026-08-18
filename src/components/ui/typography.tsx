@@ -72,7 +72,7 @@ export function SectionHeading({
         )}
       >
         {align === "left" ? (
-          <span className="h-px w-6 bg-orange-500/50" aria-hidden />
+          <span className="h-px w-6 bg-sky-500/50" aria-hidden />
         ) : null}
         {eyebrow}
       </Eyebrow>

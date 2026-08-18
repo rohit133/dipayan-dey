@@ -167,11 +167,11 @@
 @layer components {
   /* Eyebrow — smallest label above section titles */
   .type-eyebrow {
-    @apply text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-orange-300/90 sm:text-xs;
+    @apply text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-sky-300/90 sm:text-xs;
   }
 
   .text-accent {
-    @apply bg-gradient-to-r from-orange-200 via-orange-300 to-amber-200 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-sky-200 via-violet-300 to-sky-200 bg-clip-text text-transparent;
   }
 
   /* H1 — hero only */
@@ -241,7 +241,7 @@
   }
 
   .surface-featured {
-    @apply relative rounded-2xl border border-orange-500/25 bg-gradient-to-br from-orange-500/[0.1] via-white/[0.04] to-transparent shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)];
+    @apply relative rounded-2xl border border-sky-500/25 bg-gradient-to-br from-sky-500/[0.12] via-violet-500/[0.08] to-transparent shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)];
   }
 
   .glass-nav {
@@ -249,7 +249,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-orange-500 font-semibold text-white shadow-[0_1px_2px_rgba(0,0,0,0.35),0_10px_28px_-10px_rgba(249,115,22,0.55)] transition-all duration-200 hover:bg-orange-400 hover:shadow-[0_12px_32px_-10px_rgba(249,115,22,0.6)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080808];
+    @apply inline-flex items-center justify-center rounded-full bg-sky-500 font-semibold text-white shadow-[0_1px_2px_rgba(0,0,0,0.35),0_10px_28px_-10px_rgba(56,189,248,0.5)] transition-all duration-200 hover:bg-sky-400 hover:shadow-[0_12px_32px_-10px_rgba(139,92,246,0.45)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080808];
   }
 
   .btn-secondary {
@@ -261,7 +261,7 @@
   }
 
   .icon-badge {
-    @apply flex h-11 w-11 items-center justify-center rounded-xl border border-orange-500/20 bg-orange-500/10 text-orange-300;
+    @apply flex h-11 w-11 items-center justify-center rounded-xl border border-sky-500/20 bg-sky-500/10 text-sky-300;
   }
 
   .link-nav {

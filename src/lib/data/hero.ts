@@ -1,9 +1,10 @@
 import { HeroData } from "@/types";
 
 export const heroData: HeroData = {
-    badge: "Founder-led growth partner",
+    badge: "Founder-led AI performance marketing",
     headline: "Scale paid growth with better tracking, messaging, and conversion.",
-    subheadline: "For D2C and SaaS teams on Google, Meta, SEO, and programmatic.",
+    subheadline:
+        "Adbibe is a founder-led performance marketing agency based in Bangalore, specializing in paid acquisition, CRO, and programmatic media for D2C and SaaS brands.",
     cta: "Book a free strategy call",
     ctaSecondary: "See case studies",
     scrollLabel: "Trusted by",

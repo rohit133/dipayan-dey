@@ -22,15 +22,15 @@ const Hero: React.FC = () => {
             id="home"
             className="relative overflow-hidden px-4 pb-14 pt-28 sm:px-6 sm:pb-16 sm:pt-32 md:pt-36 lg:px-8"
         >
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(249,115,22,0.14),transparent)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(56,189,248,0.14),transparent)]" />
 
             <div className="relative mx-auto max-w-7xl">
                 <motion.div
                     {...fadeUp}
                     transition={{ duration: 0.5 }}
-                    className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-500/25 bg-orange-500/10 px-3.5 py-1.5 text-sm font-medium text-orange-100"
+                    className="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-500/25 bg-sky-500/10 px-3.5 py-1.5 text-sm font-medium text-sky-100"
                 >
-                    <Sparkles className="h-3.5 w-3.5 text-orange-300" />
+                    <Sparkles className="h-3.5 w-3.5 text-sky-300" />
                     <span>{heroData.badge}</span>
                 </motion.div>
 

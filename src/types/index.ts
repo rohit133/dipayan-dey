@@ -32,6 +32,7 @@ export interface Service {
     subtitle: string;
     description: string;
     icon: string;
+    platforms?: string[];
 }
 
 export interface ServicesData {

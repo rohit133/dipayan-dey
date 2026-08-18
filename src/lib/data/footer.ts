@@ -3,40 +3,43 @@ import { FooterData } from "@/types";
 export const footerData: FooterData = {
     about: {
         title: "About",
-        description: "Founder-led growth for brands that want measurable acquisition.",
+        description:
+            "Founder-led AI performance marketing agency based in Bangalore — paid acquisition, CRO, and programmatic for D2C and SaaS.",
     },
     services: {
         title: "Services",
         items: [
-            "Paid media",
+            "Performance marketing",
             "Programmatic",
-            "CRO",
-            "Analytics",
+            "AI automation",
+            "Social media",
+            "Brand strategy",
+            "Consulting",
         ],
     },
     caseStudies: {
         title: "Case Studies",
-        description: "SEO, social, programmatic, and performance work.",
+        description: "Programmatic, performance, and acquisition work for brands like Toyota, Wonderla, and Amama.",
     },
     legal: {
         privacy: {
             title: "Privacy Policy",
-            content: "How we handle your data when you use this site or contact us.",
+            content: "What data we collect, why we collect it, and how you can control it.",
             links: [{ label: "Read Privacy Policy", href: "/privacy" }],
         },
         cookies: {
-            title: "Cookies Policy",
-            content: "How cookies are used on this site.",
-            links: [{ label: "Read Cookies Policy", href: "/cookies" }],
+            title: "Cookie Policy",
+            content: "How cookies and similar technologies are used on this site.",
+            links: [{ label: "Read Cookie Policy", href: "/cookies" }],
         },
         terms: {
-            title: "Terms & Conditions",
-            content: "Terms for using this website and our services.",
-            links: [{ label: "Read Terms & Conditions", href: "/terms" }],
+            title: "Terms of Service",
+            content: "Terms for using this website and engaging Adbibe's services.",
+            links: [{ label: "Read Terms of Service", href: "/terms" }],
         },
         aiDisclosure: {
             title: "AI Disclosure",
-            content: "How AI tools support our work — always reviewed by humans.",
+            content: "How AI supports our work — always reviewed by humans before it reaches you.",
             links: [{ label: "Read AI Disclosure", href: "/ai-disclosure" }],
         },
     },

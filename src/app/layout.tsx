@@ -31,37 +31,42 @@ const eduNSWACTCursive = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://adbibe.com"),
   title: {
-    default: "Adbibe | AI-Powered Performance Marketing, CRO & Growth Consulting",
+    default: "Adbibe | Founder-led AI Performance Marketing Agency in Bangalore",
     template: "%s | Adbibe",
   },
   description:
-    "Adbibe helps D2C, SaaS, and growth-stage brands improve paid acquisition, conversion rates, tracking, and programmatic performance with founder-led execution.",
+    "Adbibe is a founder-led AI performance marketing agency based in Bangalore, India, specializing in paid acquisition, programmatic advertising, CRO, marketing automation, and brand strategy for D2C and SaaS brands.",
   keywords: [
     "Adbibe",
-    "performance marketing consultant",
-    "AI marketing consultant",
+    "performance marketing agency Bangalore",
+    "AI marketing agency",
+    "Google Ads Meta Ads",
+    "programmatic advertising",
     "conversion rate optimization",
-    "programmatic advertising consultant",
-    "Google Ads expert",
-    "Meta Ads consultant",
-    "growth consulting",
+    "marketing automation",
+    "Dipayan Dey",
   ],
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   alternates: {
     canonical: "https://adbibe.com",
   },
   openGraph: {
-    title: "Adbibe | AI-Powered Performance Marketing, CRO & Growth Consulting",
+    title: "Adbibe | Founder-led AI Performance Marketing Agency in Bangalore",
     description:
-      "Founder-led growth consulting for brands that need stronger acquisition systems, cleaner tracking, and better conversion performance.",
+      "Founder-led paid acquisition, CRO, programmatic, and AI marketing for D2C and SaaS brands.",
     url: "https://adbibe.com",
     siteName: "Adbibe",
     type: "website",
+    images: [{ url: "/logo.png", width: 64, height: 64, alt: "Adbibe" }],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Adbibe | AI-Powered Performance Marketing, CRO & Growth Consulting",
+    card: "summary",
+    title: "Adbibe | AI Performance Marketing Agency",
     description:
-      "Paid acquisition, CRO, analytics, and programmatic support for growth-stage brands.",
+      "Paid acquisition, CRO, analytics, and programmatic — founder-led from Bangalore.",
   },
   robots: {
     index: true,
@@ -87,7 +92,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${onest.variable} ${fraunces.variable} ${geistMono.variable} ${eduNSWACTCursive.variable} antialiased selection:bg-orange-500/30`}>
+      <body className={`${onest.variable} ${fraunces.variable} ${geistMono.variable} ${eduNSWACTCursive.variable} antialiased selection:bg-sky-500/30`}>
         <GlobalBackground />
         <SmoothScroll>
           {children}

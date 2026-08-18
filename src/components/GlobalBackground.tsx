@@ -38,8 +38,8 @@ const GlobalBackground: React.FC = () => {
                 }}
             />
 
-            <div className="absolute -left-[20%] top-[-15%] h-[45%] w-[45%] rounded-full bg-orange-600/[0.07] blur-[100px]" />
-            <div className="absolute -right-[15%] bottom-[10%] h-[35%] w-[35%] rounded-full bg-orange-900/[0.06] blur-[100px]" />
+            <div className="absolute -left-[20%] top-[-15%] h-[45%] w-[45%] rounded-full bg-sky-500/[0.08] blur-[100px]" />
+            <div className="absolute -right-[15%] bottom-[10%] h-[35%] w-[35%] rounded-full bg-violet-600/[0.07] blur-[100px]" />
         </div>
     );
 };

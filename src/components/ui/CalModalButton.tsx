@@ -38,7 +38,7 @@ export const CalModalButton = forwardRef<HTMLButtonElement, CalModalButtonProps>
                     hideEventTypeDetails: false,
                     layout: "month_view",
                     theme: "dark",
-                    styles: { branding: { brandColor: "#ea580c" } },
+                    styles: { branding: { brandColor: "#0ea5e9" } },
                 });
             })();
         }, []);

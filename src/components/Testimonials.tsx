@@ -31,13 +31,13 @@ const Testimonials: React.FC = () => {
                             viewport={{ once: true, margin: "-40px" }}
                             className="surface-card flex h-full flex-col p-6 md:p-7"
                         >
-                            <Quote className="h-7 w-7 text-orange-400/70" />
+                            <Quote className="h-7 w-7 text-sky-400/70" />
                             <BodyText className="mt-4 flex-1 text-white/72">
                                 &ldquo;{testimonial.quote}&rdquo;
                             </BodyText>
 
                             <div className="mt-6 flex items-center gap-3 border-t border-white/[0.06] pt-5">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500/12 text-xs font-bold uppercase text-orange-200">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/12 text-xs font-bold uppercase text-sky-200">
                                     {testimonial.company
                                         .split(" ")
                                         .map((word) => word[0])

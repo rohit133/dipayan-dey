@@ -86,7 +86,7 @@ const Contact: React.FC = () => {
                     title={
                         <>
                             {contactData.title}{" "}
-                            <span className="text-orange-300">{contactData.titleItalic}</span>
+                            <span className="text-sky-300">{contactData.titleItalic}</span>
                         </>
                     }
                     description={contactData.description}
@@ -112,7 +112,7 @@ const Contact: React.FC = () => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
-                                    className="h-11 rounded-xl border-white/10 bg-black/20 transition-colors focus-visible:border-orange-500/40 focus-visible:ring-orange-500/20"
+                                    className="h-11 rounded-xl border-white/10 bg-black/20 transition-colors focus-visible:border-sky-500/40 focus-visible:ring-sky-500/20"
                                     placeholder="Your name"
                                 />
                             </div>
@@ -126,7 +126,7 @@ const Contact: React.FC = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
-                                    className="h-11 rounded-xl border-white/10 bg-black/20 transition-colors focus-visible:border-orange-500/40 focus-visible:ring-orange-500/20"
+                                    className="h-11 rounded-xl border-white/10 bg-black/20 transition-colors focus-visible:border-sky-500/40 focus-visible:ring-sky-500/20"
                                     placeholder="you@company.com"
                                 />
                             </div>
@@ -156,7 +156,7 @@ const Contact: React.FC = () => {
                                 onChange={handleChange}
                                 required
                                 rows={4}
-                                className="min-h-[100px] rounded-xl border-white/10 bg-black/20 transition-colors focus-visible:border-orange-500/40 focus-visible:ring-orange-500/20"
+                                className="min-h-[100px] rounded-xl border-white/10 bg-black/20 transition-colors focus-visible:border-sky-500/40 focus-visible:ring-sky-500/20"
                                 placeholder="What do you need help with?"
                             />
                         </div>
@@ -172,7 +172,7 @@ const Contact: React.FC = () => {
                             const Icon = item.icon;
                             const inner = (
                                 <>
-                                    <Icon className="h-4 w-4 shrink-0 text-orange-300" />
+                                    <Icon className="h-4 w-4 shrink-0 text-sky-300" />
                                     <span className="truncate text-xs font-medium text-white/80 sm:text-sm">
                                         {item.label}
                                     </span>
