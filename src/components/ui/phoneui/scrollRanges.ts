@@ -3,10 +3,10 @@
  * Strict: no overlapping scroll where feeds and ads both move.
  */
 export const SCROLL = {
-  REVEAL_START: 0.05,
-  REVEAL_END: 0.22,
-  START: 0.18,
-  END: 0.92,
+  REVEAL_START: 0,
+  REVEAL_END: 0.12,
+  START: 0.08,
+  END: 0.85,
 } as const;
 
 const RANGE = SCROLL.END - SCROLL.START;
