@@ -138,7 +138,8 @@
 
 @layer base {
   html {
-    @apply bg-[#0a0a0a];
+    @apply bg-[#080808];
+    scroll-behavior: smooth;
   }
 
   * {
@@ -146,6 +147,168 @@
   }
 
   body {
-    @apply bg-[#0a0a0a] text-foreground overflow-x-hidden;
+    @apply bg-[#080808] text-foreground overflow-x-hidden font-sans text-base;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-white;
+  }
+
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  /* Tailwind v4 preflight sets cursor:default on buttons — restore the pointer
+     on everything clickable (project cards, filters, FAQ rows, nav, etc.) */
+  button,
+  summary,
+  [role="button"],
+  [role="tab"],
+  [onclick],
+  label[for],
+  select,
+  a[href] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role="button"][aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}
+
+@layer components {
+  /* Eyebrow — smallest label above section titles */
+  .type-eyebrow {
+    @apply text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-sky-300/90 sm:text-xs;
+  }
+
+  .text-accent {
+    @apply bg-gradient-to-r from-sky-200 via-violet-300 to-sky-200 bg-clip-text text-transparent;
+  }
+
+  /* H1 — hero only */
+  .type-hero {
+    @apply font-display text-[2rem] font-semibold leading-[1.08] tracking-tight text-white sm:text-[2.5rem] md:text-[3rem] lg:text-[3.25rem];
+  }
+
+  /* H2 — section titles */
+  .type-section-title {
+    @apply font-display text-[1.75rem] font-semibold leading-[1.12] tracking-tight text-white sm:text-[2rem] lg:text-[2.375rem];
+  }
+
+  /* H3 — cards, case studies, service blocks */
+  .type-card-title {
+    @apply font-sans text-lg font-bold leading-snug tracking-tight text-white sm:text-xl;
+  }
+
+  /* H4 — nested blocks */
+  .type-subheading {
+    @apply font-sans text-base font-semibold leading-snug text-white sm:text-lg;
+  }
+
+  /* Lead paragraph under section titles */
+  .type-lead {
+    @apply text-base leading-8 text-white/72 sm:text-lg;
+  }
+
+  /* Default body copy */
+  .type-body {
+    @apply text-sm leading-7 text-white/72 sm:text-base sm:leading-8;
+  }
+
+  /* Stat / metric numbers */
+  .type-stat {
+    @apply font-display text-xl font-semibold tracking-tight text-white sm:text-2xl;
+  }
+
+  /* Stat labels */
+  .type-stat-label {
+    @apply text-sm leading-6 text-white/60;
+  }
+
+  /* Consistent section spacing — avoids huge vertical gaps */
+  .section-shell {
+    @apply relative px-4 py-12 sm:px-6 md:py-16 lg:px-8;
+  }
+
+  .section-inner {
+    @apply mx-auto max-w-7xl;
+  }
+
+  .section-alt {
+    @apply border-y border-white/[0.04] bg-white/[0.02];
+  }
+
+  /* Elevated card — consistent across sections */
+  .surface-card {
+    @apply relative rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.05] to-white/[0.015] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_20px_40px_-28px_rgba(0,0,0,0.8)] transition-[border-color,transform,box-shadow] duration-300 ease-out;
+  }
+
+  .surface-card:hover {
+    @apply border-white/[0.14] -translate-y-0.5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08),0_28px_56px_-28px_rgba(0,0,0,0.85)];
+  }
+
+  .surface-card-static {
+    @apply relative rounded-2xl border border-white/[0.08] bg-gradient-to-b from-white/[0.05] to-white/[0.015] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)];
+  }
+
+  .surface-featured {
+    @apply relative rounded-2xl border border-sky-500/25 bg-gradient-to-br from-sky-500/[0.12] via-violet-500/[0.08] to-transparent shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)];
+  }
+
+  .glass-nav {
+    @apply border-white/10 bg-[#0a0a0a]/75 shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl backdrop-saturate-150;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-sky-500 font-semibold text-white shadow-[0_1px_2px_rgba(0,0,0,0.35),0_10px_28px_-10px_rgba(56,189,248,0.5)] transition-all duration-200 hover:bg-sky-400 hover:shadow-[0_12px_32px_-10px_rgba(139,92,246,0.45)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080808];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-white/12 bg-white/[0.03] font-semibold text-white/90 transition-all duration-200 hover:border-white/22 hover:bg-white/[0.07] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080808];
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-white/[0.08] bg-white/[0.04] px-3.5 py-1.5 text-sm text-white/70 backdrop-blur-sm transition-colors hover:border-white/14 hover:text-white/90;
+  }
+
+  .icon-badge {
+    @apply flex h-11 w-11 items-center justify-center rounded-xl border border-sky-500/20 bg-sky-500/10 text-sky-300;
+  }
+
+  .link-nav {
+    @apply text-sm font-medium text-white/65 transition-colors hover:text-white;
+  }
+
+  .link-nav:hover {
+    @apply underline decoration-white/25 underline-offset-4;
+  }
+
+  @keyframes reviews-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .reviews-marquee {
+    animation: reviews-marquee 45s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reviews-marquee {
+      animation: none;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+    }
   }
 }

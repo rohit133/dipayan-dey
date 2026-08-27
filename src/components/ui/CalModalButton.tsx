@@ -1,50 +1,66 @@
 "use client";
 
 import { getCalApi } from "@calcom/embed-react";
-import { useEffect, ReactNode } from "react";
+import React, { forwardRef, type ComponentProps, type ReactNode, useEffect } from "react";
+
+import { contactData } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 
-interface CalModalButtonProps {
-    children: ReactNode;
+const CAL_NAMESPACE = "15min";
+
+interface CalModalButtonProps extends ComponentProps<typeof Button> {
     className?: string;
     calLink?: string;
-    config?: any;
-    variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
-    size?: "default" | "sm" | "lg" | "icon";
-    onClick?: () => void;
-    [key: string]: any; // Allow other props
+    config?: Record<string, unknown>;
 }
 
-export const CalModalButton = ({
-    children,
-    className = "",
-    calLink = "rohit-sharma-2qyjpz/secret",
-    config = { "layout": "month_view", "useSlotsViewOnSmallScreen": "true" },
-    variant = "default",
-    size = "default",
-    onClick,
-    ...props
-}: CalModalButtonProps) => {
+const normalizeCalLink = (link: string) =>
+    link
+        .replace(/^(https?:\/\/)?(www\.)?cal\.com\//, "")
+        .replace(/^\/+/, "");
 
-    useEffect(() => {
-        (async function () {
-            const cal = await getCalApi({ "namespace": "secret" });
-            cal("ui", { "hideEventTypeDetails": false, "layout": "month_view" });
-        })();
-    }, []);
+export const CalModalButton = forwardRef<HTMLButtonElement, CalModalButtonProps>(
+    (
+        {
+            children,
+            className = "",
+            calLink = contactData.calCom,
+            config = { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+            variant = "default",
+            size = "default",
+            onClick,
+            ...props
+        },
+        ref
+    ) => {
+        useEffect(() => {
+            (async () => {
+                const cal = await getCalApi({ namespace: CAL_NAMESPACE });
+                cal("ui", {
+                    hideEventTypeDetails: false,
+                    layout: "month_view",
+                    theme: "dark",
+                    styles: { branding: { brandColor: "#0ea5e9" } },
+                });
+            })();
+        }, []);
 
-    return (
-        <Button
-            data-cal-namespace="secret"
-            data-cal-link={calLink}
-            data-cal-config={JSON.stringify(config)}
-            variant={variant}
-            size={size}
-            className={className}
-            onClick={onClick}
-            {...props}
-        >
-            {children}
-        </Button>
-    );
-};
+        return (
+            <Button
+                ref={ref}
+                data-cal-link={normalizeCalLink(calLink)}
+                data-cal-namespace={CAL_NAMESPACE}
+                data-cal-config={JSON.stringify(config)}
+                variant={variant}
+                size={size}
+                className={className}
+                onClick={onClick}
+                {...props}
+            >
+                {children}
+            </Button>
+        );
+    }
+);
+
+CalModalButton.displayName = "CalModalButton";

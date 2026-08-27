@@ -1,7 +1,8 @@
 "use client";
 
-import React from 'react';
-import NoiseBackground from './NoiseBackground';
+import React from "react";
+
+import NoiseBackground from "./NoiseBackground";
 
 const GlobalBackground: React.FC = () => {
     const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
@@ -10,29 +11,35 @@ const GlobalBackground: React.FC = () => {
         const updateMousePosition = (ev: MouseEvent) => {
             setMousePosition({ x: ev.clientX, y: ev.clientY });
         };
-        window.addEventListener('mousemove', updateMousePosition);
-        return () => {
-            window.removeEventListener('mousemove', updateMousePosition);
-        };
+        window.addEventListener("mousemove", updateMousePosition);
+        return () => window.removeEventListener("mousemove", updateMousePosition);
     }, []);
 
     return (
-        <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-background transition-colors duration-sm">
-            <NoiseBackground opacity={0.03} />
+        <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#080808]">
+            <NoiseBackground opacity={0.025} />
 
-            {/* Global Mouse Spotlight */}
+            {/* Subtle grid */}
             <div
-                className="absolute inset-0 transition-opacity duration-300"
+                className="absolute inset-0 opacity-[0.35]"
                 style={{
-                    background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(249, 115, 22, 0.06), transparent 50%)`
+                    backgroundImage:
+                        "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+                    backgroundSize: "64px 64px",
+                    maskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent)",
                 }}
             />
 
-            {/* Premium Ambient Glows - Top Left */}
-            <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-orange-600/10 dark:bg-orange-600/5 rounded-full blur-[120px] animate-pulse" />
+            {/* Cursor spotlight — subtle */}
+            <div
+                className="absolute inset-0 transition-opacity duration-500"
+                style={{
+                    background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(249, 115, 22, 0.04), transparent 55%)`,
+                }}
+            />
 
-            {/* Premium Ambient Glows - Bottom Right */}
-            <div className="absolute bottom-[20%] right-[-10%] w-[40%] h-[40%] bg-orange-900/10 dark:bg-orange-900/5 rounded-full blur-[120px]" />
+            <div className="absolute -left-[20%] top-[-15%] h-[45%] w-[45%] rounded-full bg-sky-500/[0.08] blur-[100px]" />
+            <div className="absolute -right-[15%] bottom-[10%] h-[35%] w-[35%] rounded-full bg-violet-600/[0.07] blur-[100px]" />
         </div>
     );
 };

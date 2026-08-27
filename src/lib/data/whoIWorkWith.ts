@@ -1,28 +1,20 @@
 import { WhoIWorkWithData } from "@/types";
 
 export const whoIWorkWithData: WhoIWorkWithData = {
-    title: "Who I Work With",
-    subtitle: "I focus on brands that care about profit, not just impressions.",
+    title: "Who We Work With",
+    subtitle: "Teams that care about lead quality, CAC, and clear attribution.",
     audiences: [
         {
-            type: "Startups & D2C Brands",
-            description: "Early-stage brands looking to scale profitably from day one."
+            type: "D2C brands",
+            description: "Scaling paid spend and improving landing-page conversion.",
         },
         {
-            type: "Large Enterprises",
-            description: "Corporate organizations needing structured digital transformation."
+            type: "SaaS & B2B",
+            description: "Better pipeline quality, tracking, and sales handoff.",
         },
         {
             type: "Agencies",
-            description: "Partners needing expert programmatic and ad ops execution."
+            description: "Programmatic, performance, and reporting support.",
         },
-        {
-            type: "E-Commerce",
-            description: "Brands focused on ROAS, CPA, and measurable sales growth."
-        },
-        {
-            type: "Real Estate & Construction",
-            description: "Traditional industries looking to build a digital culture."
-        }
-    ]
+    ],
 };

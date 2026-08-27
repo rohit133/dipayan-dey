@@ -3,6 +3,12 @@
 import { useEffect, ReactNode } from "react";
 import Lenis from "lenis";
 
+declare global {
+    interface Window {
+        lenis?: Lenis;
+    }
+}
+
 interface SmoothScrollProps {
     children: ReactNode;
 }
@@ -26,6 +32,9 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
         }
 
         requestAnimationFrame(raf);
+
+        // Expose the instance so overlays (modals) can pause smooth scrolling
+        window.lenis = lenis;
 
         // Add CSS for Lenis
         document.documentElement.classList.add('lenis');
@@ -52,6 +61,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
         document.head.appendChild(style);
 
         return () => {
+            if (window.lenis === lenis) delete window.lenis;
             lenis.destroy();
             document.documentElement.classList.remove('lenis');
             document.head.removeChild(style);
