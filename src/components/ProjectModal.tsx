@@ -19,12 +19,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
+            window.lenis?.stop();
         } else {
             document.body.style.overflow = "unset";
+            window.lenis?.start();
         }
 
         return () => {
             document.body.style.overflow = "unset";
+            window.lenis?.start();
         };
     }, [isOpen]);
 
@@ -57,7 +60,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
                             <X className="h-5 w-5" />
                         </button>
 
-                        <div className="grid max-h-[88vh] overflow-y-auto md:grid-cols-[0.82fr_1.18fr]">
+                        <div
+                            data-lenis-prevent
+                            className="grid max-h-[88vh] overflow-y-auto overscroll-contain md:grid-cols-[0.82fr_1.18fr]"
+                        >
                             <div className="relative min-h-[260px] overflow-hidden border-b border-white/10 md:min-h-full md:border-b-0 md:border-r">
                                 {project.image ? (
                                     <img

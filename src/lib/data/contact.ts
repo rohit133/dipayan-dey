@@ -9,7 +9,7 @@ export const contactData: ContactData = {
     email: "hello@adbibe.com",
     linkedin: "www.linkedin.com/company/adbibeofficial",
     calendly: "calendly.com/performancemarketer/strategy-call",
-    calCom: "cal.com/dipayan",
+    calCom: "cal.com/adbibe-dey-u4ovqn/15min",
     boxLabels: {
         email: "Email",
         linkedin: "LinkedIn",
@@ -17,6 +17,6 @@ export const contactData: ContactData = {
     },
     protocol: {
         title: "Next steps",
-        description: "30-min call: your funnel, gaps, and what to fix first. No hard sell.",
+        description: "15-min call: your funnel, gaps, and what to fix first. No hard sell.",
     },
 };

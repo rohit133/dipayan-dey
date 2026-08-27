@@ -37,15 +37,27 @@ const Header: React.FC = () => {
 
     useEffect(() => {
         document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+        // Lenis hijacks wheel/touch on window, so body overflow alone won't lock it
+        if (isMobileMenuOpen) window.lenis?.stop();
+        else window.lenis?.start();
         return () => {
             document.body.style.overflow = "";
+            window.lenis?.start();
         };
     }, [isMobileMenuOpen]);
 
     const scrollToHash = (href: string) => {
         const hash = href.includes("#") ? href.split("#")[1] : "";
         if (!hash) return;
-        document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        const target = document.getElementById(hash);
+        if (!target) return;
+        if (window.lenis) {
+            // the mobile menu may have just stopped Lenis in the same tick
+            window.lenis.start();
+            window.lenis.scrollTo(target, { offset: -88 });
+        } else {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
     };
 
     const handleHashNav = (e: React.MouseEvent, item: NavItem) => {

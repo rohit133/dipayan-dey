@@ -24,7 +24,7 @@ export const communityData: CommunityData = {
                 "Creator peer network",
             ],
             // TODO: Replace with your Influencer WhatsApp group invite link
-            whatsappGroupUrl: "https://chat.whatsapp.com/INVITE_INFLUENCERS",
+            whatsappGroupUrl: "https://chat.whatsapp.com/LFIte3z5pBHFkPGUDdKT3M?s=cl&p=i&mlu=4",
             memberLabel: "500+ creators",
         },
         {
@@ -39,7 +39,7 @@ export const communityData: CommunityData = {
                 "Adbibe partner referrals",
             ],
             // TODO: Replace with your Freelancer WhatsApp group invite link
-            whatsappGroupUrl: "https://chat.whatsapp.com/INVITE_FREELANCERS",
+            whatsappGroupUrl: "https://chat.whatsapp.com/EbCzjYc5rINJOKc7wgpLJn?s=cl&p=i&mlu=4",
             memberLabel: "300+ freelancers",
         },
     ],

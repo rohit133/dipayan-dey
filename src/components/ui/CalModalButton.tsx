@@ -6,6 +6,8 @@ import React, { forwardRef, type ComponentProps, type ReactNode, useEffect } fro
 import { contactData } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 
+const CAL_NAMESPACE = "15min";
+
 interface CalModalButtonProps extends ComponentProps<typeof Button> {
     className?: string;
     calLink?: string;
@@ -23,7 +25,7 @@ export const CalModalButton = forwardRef<HTMLButtonElement, CalModalButtonProps>
             children,
             className = "",
             calLink = contactData.calCom,
-            config = { layout: "month_view", useSlotsViewOnSmallScreen: true },
+            config = { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
             variant = "default",
             size = "default",
             onClick,
@@ -33,7 +35,7 @@ export const CalModalButton = forwardRef<HTMLButtonElement, CalModalButtonProps>
     ) => {
         useEffect(() => {
             (async () => {
-                const cal = await getCalApi();
+                const cal = await getCalApi({ namespace: CAL_NAMESPACE });
                 cal("ui", {
                     hideEventTypeDetails: false,
                     layout: "month_view",
@@ -47,6 +49,7 @@ export const CalModalButton = forwardRef<HTMLButtonElement, CalModalButtonProps>
             <Button
                 ref={ref}
                 data-cal-link={normalizeCalLink(calLink)}
+                data-cal-namespace={CAL_NAMESPACE}
                 data-cal-config={JSON.stringify(config)}
                 variant={variant}
                 size={size}

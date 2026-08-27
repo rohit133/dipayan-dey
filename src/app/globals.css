@@ -162,6 +162,24 @@
   [id] {
     scroll-margin-top: 5.5rem;
   }
+
+  /* Tailwind v4 preflight sets cursor:default on buttons — restore the pointer
+     on everything clickable (project cards, filters, FAQ rows, nav, etc.) */
+  button,
+  summary,
+  [role="button"],
+  [role="tab"],
+  [onclick],
+  label[for],
+  select,
+  a[href] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role="button"][aria-disabled="true"] {
+    cursor: not-allowed;
+  }
 }
 
 @layer components {
